@@ -3,136 +3,90 @@ import Layout from '../layouts/Layout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import siteConfig from '../../site.config.json';
 
-// Three states, in priority order:
-//   1. rsvp.endpoint set   → the built-in form below posts straight to it (Formspree)
-//   2. rsvp.formEmbedUrl   → embed an external form (Google Forms) instead
-//   3. neither             → a friendly "not open yet" note for guests
-const { endpoint, formEmbedUrl, formUrl } = siteConfig.rsvp as {
+// RSVP has three possible modes, set by site.config.json -> rsvp.method:
+//   'whatsapp' (default) — guests copy a ready-made message into their own chat.
+//                          Kelly's number is NOT published unless whatsappNumber is set.
+//   'form'              — the built-in form, posting to rsvp.endpoint (Formspree).
+//   'embed'             — an external form (Google Forms) via rsvp.formEmbedUrl.
+const rsvp = siteConfig.rsvp as {
+  method?: string;
+  whatsappNumber?: string;
   endpoint?: string;
   formEmbedUrl?: string;
   formUrl?: string;
 };
+const method = rsvp.method ?? 'whatsapp';
+const waNumber = (rsvp.whatsappNumber ?? '').replace(/[^0-9]/g, '');
 
-const parts = [
-  'Thursday arrival drinks',
-  'Friday — the defense',
-  'Friday — the party tram',
-  'Friday — dinner & the night out',
-  'Saturday–Sunday — reservoir weekend',
-];
-const arrivalDays = ['Thursday', 'Friday', 'Earlier in the week', 'Not sure yet'];
-const departureDays = ['Saturday', 'Sunday', 'Monday', 'Later', 'Not sure yet'];
-const routes = ['Direct to Brno', 'Via Vienna', 'Via Bratislava', 'Via Prague', 'Driving', 'Not sure yet'];
-const accommodation = [
-  'Booked already',
-  "I'd like a recommendation",
-  'Hoping for a spot at the reservoir house',
-  'Not sorted yet',
+const template = `Hi Kelly! RSVP for Going Ape Shit 🦍
+
+Name:
+Coming? (yes / no / not sure):
+Which bits: (Thursday drinks / the defense / party tram / dinner & night out / reservoir weekend)
+Arriving:
+Leaving:
+Bringing anyone:
+Dietary needs / allergies:
+Song for the tram:
+Anything else:`;
+
+const waLink = waNumber
+  ? `https://wa.me/${waNumber}?text=${encodeURIComponent(template)}`
+  : '';
+
+const asks = [
+  'Your name',
+  'Whether you can make it',
+  'Which bits you want to join',
+  'When you arrive and leave',
+  'Anyone you’re bringing — partners and children very welcome',
+  'Dietary needs or allergies',
+  'A song for the tram',
 ];
 ---
 
-<Layout title="RSVP" description="Let Kelly know if you can make it.">
+<Layout title="RSVP" description="RSVP by WhatsApp — just message Kelly.">
   <PageHeader
     eyebrow="Yes, you"
     title="RSVP"
-    lead="One quick form. It helps Kelly plan everything from the tram to the reservoir beds."
+    lead="No forms, no logins. Just WhatsApp Kelly — you already have her number."
   />
 
   <section class="section">
     <div class="container rsvp-wrap">
-      {endpoint ? (
-        <form class="rsvp-form" action={endpoint} method="POST">
-          <input type="hidden" name="_subject" value="Going Ape Shit — new RSVP" />
-
-          <div class="field">
-            <label for="name">Full name <span class="req" aria-hidden="true">*</span></label>
-            <input id="name" name="name" type="text" required autocomplete="name" />
+      {method === 'whatsapp' ? (
+        <>
+          <div class="card rsvp-card">
+            <h2>What to tell me</h2>
+            <ul class="asks">
+              {asks.map((a) => <li>{a}</li>)}
+            </ul>
+            <p class="muted">
+              Nothing formal — a one-line “yes, all of it” is a perfectly good RSVP. The details just help
+              with planning the tram, the dinner table and the reservoir beds.
+            </p>
           </div>
 
-          <div class="field">
-            <label for="email">Email <span class="req" aria-hidden="true">*</span></label>
-            <input id="email" name="email" type="email" required autocomplete="email" />
-          </div>
-
-          <div class="field">
-            <label for="phone">Mobile <span class="hint">(with country code)</span></label>
-            <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+31 6 12345678" />
-          </div>
-
-          <fieldset class="field">
-            <legend>Can you make it? <span class="req" aria-hidden="true">*</span></legend>
-            <label class="choice"><input type="radio" name="attending" value="Yes" required /> <span>Yes — wouldn't miss it</span></label>
-            <label class="choice"><input type="radio" name="attending" value="Can't make it" /> <span>Sadly can't make it</span></label>
-            <label class="choice"><input type="radio" name="attending" value="Not sure yet" /> <span>Not sure yet</span></label>
-          </fieldset>
-
-          <fieldset class="field">
-            <legend>Which bits will you join?</legend>
-            {parts.map((p) => (
-              <label class="choice"><input type="checkbox" name="joining" value={p} /> <span>{p}</span></label>
-            ))}
-          </fieldset>
-
-          <div class="field-row">
-            <div class="field">
-              <label for="arrival">Arriving</label>
-              <select id="arrival" name="arrival">
-                <option value="">—</option>
-                {arrivalDays.map((d) => <option value={d}>{d}</option>)}
-              </select>
-            </div>
-            <div class="field">
-              <label for="departure">Leaving</label>
-              <select id="departure" name="departure">
-                <option value="">—</option>
-                {departureDays.map((d) => <option value={d}>{d}</option>)}
-              </select>
+          <div class="card rsvp-card">
+            <h2>Copy &amp; paste</h2>
+            <p class="muted">Tap copy, open our chat, paste, fill it in. That’s the whole thing.</p>
+            <pre class="template" id="rsvp-template">{template}</pre>
+            <div class="rsvp-actions">
+              <button class="btn btn--gold" type="button" id="copy-btn" data-label="Copy the message">Copy the message</button>
+              {waLink && (
+                <a class="btn btn--ghost" href={waLink} target="_blank" rel="noopener">Open WhatsApp ↗</a>
+              )}
             </div>
           </div>
 
-          <div class="field">
-            <label for="route">How are you getting here?</label>
-            <select id="route" name="route">
-              <option value="">—</option>
-              {routes.map((r) => <option value={r}>{r}</option>)}
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="accommodation">Accommodation</label>
-            <select id="accommodation" name="accommodation">
-              <option value="">—</option>
-              {accommodation.map((a) => <option value={a}>{a}</option>)}
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="guests">Bringing anyone? <span class="hint">(partners and children are very welcome)</span></label>
-            <input id="guests" name="guests" type="text" placeholder="Just me / +1 / two kids aged 4 and 7" />
-          </div>
-
-          <div class="field">
-            <label for="dietary">Dietary requirements or allergies</label>
-            <input id="dietary" name="dietary" type="text" />
-          </div>
-
-          <div class="field">
-            <label for="song">A song for the tram <span class="hint">(optional, but encouraged)</span></label>
-            <input id="song" name="song" type="text" />
-          </div>
-
-          <div class="field">
-            <label for="message">Anything else?</label>
-            <textarea id="message" name="message" rows="4"></textarea>
-          </div>
-
-          <button class="btn btn--gold rsvp-submit" type="submit">Send my RSVP</button>
-          <p class="muted rsvp-foot">Required fields are marked <span class="req">*</span>. Everything else is optional.</p>
-        </form>
-      ) : formEmbedUrl ? (
+          <p class="muted center rsvp-foot">
+            Not on WhatsApp? A text, an email or a shout across a corridor all work just as well.
+          </p>
+        </>
+      ) : method === 'embed' && rsvp.formEmbedUrl ? (
         <div class="rsvp-frame">
           <iframe
-            src={formEmbedUrl}
+            src={rsvp.formEmbedUrl}
             title="RSVP form"
             width="100%"
             height="1400"
@@ -145,53 +99,60 @@ const accommodation = [
       ) : (
         <div class="callout rsvp-placeholder">
           <h3>RSVPs open soon</h3>
-          <p>The form isn't live just yet — check back shortly, or just message Kelly directly in the meantime.</p>
+          <p>The form isn’t live just yet — check back shortly, or just message Kelly directly in the meantime.</p>
         </div>
-      )}
-
-      {formEmbedUrl && formUrl && !endpoint && (
-        <p class="muted center" style="margin-top:1rem">
-          Form not loading? <a href={formUrl} target="_blank" rel="noopener">Open it in a new tab ↗</a>
-        </p>
       )}
     </div>
   </section>
 </Layout>
 
 <style>
-  .rsvp-wrap { max-width: 720px; }
-  .rsvp-frame { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
-  .rsvp-frame iframe { display: block; width: 100%; }
-
-  .rsvp-form { display: flex; flex-direction: column; gap: 1.25rem; }
-  .field { display: flex; flex-direction: column; gap: 0.4rem; border: 0; padding: 0; margin: 0; }
-  .field-row { display: grid; gap: 1.25rem; }
-  @media (min-width: 560px) { .field-row { grid-template-columns: 1fr 1fr; } }
-
-  label, legend { font-weight: 700; color: var(--forest-800); font-size: 0.95rem; padding: 0; }
-  .hint { font-weight: 400; color: var(--ink-soft); font-size: 0.85rem; }
-  .req { color: var(--gold); }
-
-  input[type='text'], input[type='email'], input[type='tel'], select, textarea {
-    font-family: var(--font-body);
-    font-size: 1rem;
-    padding: 0.65rem 0.75rem;
+  .rsvp-wrap { max-width: 720px; display: flex; flex-direction: column; gap: 1.25rem; }
+  .rsvp-card h2 { margin-top: 0; }
+  .asks { margin: 0 0 1rem; padding-left: 1.2rem; }
+  .asks li { margin-bottom: 0.35rem; }
+  .template {
+    background: rgba(0, 0, 0, 0.05);
     border: 1px solid var(--line);
     border-radius: 10px;
-    background: var(--surface);
-    color: var(--ink);
-    width: 100%;
+    padding: 0.9rem 1rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.85rem;
+    line-height: 1.55;
+    white-space: pre-wrap;
+    overflow-x: auto;
+    margin: 0 0 1rem;
   }
-  textarea { resize: vertical; }
-  input:focus-visible, select:focus-visible, textarea:focus-visible {
-    outline: 2px solid var(--gold);
-    outline-offset: 1px;
-  }
-
-  .choice { display: flex; align-items: center; gap: 0.55rem; font-weight: 400; }
-  .choice input { width: 1.05rem; height: 1.05rem; accent-color: var(--forest-600); flex: none; }
-
-  .rsvp-submit { align-self: flex-start; margin-top: 0.25rem; }
-  .rsvp-foot { font-size: 0.85rem; }
+  .rsvp-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .rsvp-foot { font-size: 0.9rem; }
+  .rsvp-frame { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  .rsvp-frame iframe { display: block; width: 100%; }
   .rsvp-placeholder { text-align: center; }
 </style>
+
+<script>
+  const btn = document.getElementById('copy-btn');
+  const tpl = document.getElementById('rsvp-template');
+  if (btn && tpl) {
+    btn.addEventListener('click', async () => {
+      const text = tpl.textContent ?? '';
+      let ok = false;
+      try {
+        await navigator.clipboard.writeText(text);
+        ok = true;
+      } catch {
+        // Clipboard API needs a secure context and permission. Fall back to
+        // selecting the text so the guest can copy it by hand.
+        const range = document.createRange();
+        range.selectNodeContents(tpl);
+        const sel = window.getSelection();
+        sel?.removeAllRanges();
+        sel?.addRange(range);
+      }
+      btn.textContent = ok ? 'Copied ✓' : 'Select all & copy';
+      setTimeout(() => {
+        btn.textContent = btn.dataset.label ?? 'Copy the message';
+      }, 2500);
+    });
+  }
+</script>

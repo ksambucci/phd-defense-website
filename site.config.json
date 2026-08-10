@@ -24,7 +24,9 @@
   },
 
   "rsvp": {
-    "_comment": "TWO WAYS to collect RSVPs — pick one. (1) EASIEST: sign up free at formspree.io, create a form, and paste its endpoint (looks like https://formspree.io/f/abcdwxyz) into 'endpoint' below. The built-in form on this site then works immediately and replies land in your email. (2) Or build it in Google Forms and paste the embed src into 'formEmbedUrl' (Send → <> Embed HTML → copy the src). 'endpoint' wins if both are filled.",
+    "_comment": "RSVP is by WhatsApp — guests already have Kelly's number, so it is deliberately NOT published here (a public page would expose it to scrapers). Guests copy a ready-made message and paste it into their existing chat. OPTIONAL: to add a one-tap 'Open WhatsApp' button, put the number in 'whatsappNumber' in international format with no +, spaces or dashes (e.g. 31612345678) — but note that DOES publish it. Set method to 'form' to go back to the built-in form (needs 'endpoint') or 'embed' for a Google Form ('formEmbedUrl').",
+    "method": "whatsapp",
+    "whatsappNumber": "",
     "endpoint": "",
     "formEmbedUrl": "",
     "formUrl": ""

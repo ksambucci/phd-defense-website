@@ -12,6 +12,13 @@
     "departure": "Depart Sunday",
     "who": "[Kelly to assign who's staying at the house.]"
   },
+  "photos": [
+    { "src": "/images/reservoir/terrace.jpg", "alt": "Covered terrace and decking at Chata Prýgl" },
+    { "src": "/images/reservoir/pool.jpg", "alt": "Heated outdoor pool with sun loungers" },
+    { "src": "/images/reservoir/bedroom-view.jpg", "alt": "Bedroom with a balcony looking over the Brno reservoir" },
+    { "src": "/images/reservoir/garden-court.jpg", "alt": "Garden with a multi-sport court and fire pit" }
+  ],
+  "photoCredit": "House photos courtesy of Chata Prýgl",
   "activities": [
     "Boat trips on the reservoir",
     "Swimming",

@@ -23,8 +23,17 @@ import reservoir from '../data/reservoir.json';
             <li><span>Who</span> {reservoir.logistics.who}</li>
           </ul>
         </div>
-        <Figure src="/images/reservoir/house.jpg" alt="The reservoir house" label="The reservoir house" ratio="4 / 3" />
+        <Figure src={reservoir.photos[0].src} alt={reservoir.photos[0].alt} label="The reservoir house" ratio="4 / 3" />
       </div>
+
+      <div class="res-gallery">
+        {reservoir.photos.slice(1).map((p) => (
+          <Figure src={p.src} alt={p.alt} label="The reservoir house" ratio="4 / 3" />
+        ))}
+      </div>
+      <p class="muted res-credit">
+        {reservoir.photoCredit} — <a href={reservoir.house.url} target="_blank" rel="noopener">chataprygl.cz ↗</a>
+      </p>
 
       <h2 style="margin-top:2.5rem">Things to do at the lake</h2>
       <ul class="activities">
@@ -52,4 +61,7 @@ import reservoir from '../data/reservoir.json';
   .activities { columns: 2; gap: 1.5rem; padding-left: 1.2rem; }
   .activities li { margin-bottom: 0.5rem; }
   .res-map { align-items: stretch; }
+  .res-gallery { display: grid; grid-template-columns: repeat(1, 1fr); gap: 0.8rem; margin-top: 1.5rem; }
+  @media (min-width: 640px) { .res-gallery { grid-template-columns: repeat(3, 1fr); } }
+  .res-credit { font-size: 0.85rem; margin-top: 0.7rem; }
 </style>

@@ -18,11 +18,9 @@ const donation = siteConfig.donation;
           <summary>{item.q}</summary>
           <div class="faq-item__body">
             <p>{item.a}</p>
-            {item.donation && (
+            {item.donation && donation.url && (
               <p>
-                {donation.url
-                  ? <a class="btn btn--gold" href={donation.url} target="_blank" rel="noopener">Donate to {donation.label} ↗</a>
-                  : <span class="tbc">donation link TBC</span>}
+                <a class="btn btn--gold" href={donation.url} target="_blank" rel="noopener">Donate to {donation.label} ↗</a>
               </p>
             )}
             {item.travelLink && (

@@ -12,7 +12,7 @@ export const mainNav = [
   { label: 'RSVP', href: '/rsvp' },
 ];
 
-// Fun extras — woven in, linked from the home page and footer.
+// Fun extras — in the top nav under "More", plus the home page and footer.
 export const extrasNav = [
   { label: 'PhD Timeline', href: '/timeline' },
   { label: 'Travel Map', href: '/travels' },

@@ -1,5 +1,5 @@
 ---
-import { mainNav } from '../lib/nav';
+import { mainNav, extrasNav } from '../lib/nav';
 import { url } from '../lib/url';
 import siteConfig from '../../site.config.json';
 
@@ -11,6 +11,9 @@ function isActive(href: string) {
   const here = pathname.replace(/\/$/, '') || '/';
   return target === here;
 }
+
+// Highlight "More" when the current page is one of the extras.
+const inExtras = extrasNav.some((item) => isActive(item.href));
 ---
 
 <header class="site-header">
@@ -39,6 +42,30 @@ function isActive(href: string) {
             </a>
           </li>
         ))}
+
+        <li class="nav-more">
+          <span class="nav-more__label">More</span>
+          <button
+            class={`nav-more__btn ${inExtras ? 'is-active' : ''}`}
+            aria-expanded="false"
+            aria-controls="nav-extras"
+          >
+            More <span class="nav-more__caret" aria-hidden="true">▾</span>
+          </button>
+          <ul id="nav-extras" class="nav-more__menu">
+            {extrasNav.map((item) => (
+              <li>
+                <a
+                  href={url(item.href)}
+                  class={isActive(item.href) ? 'is-active' : ''}
+                  aria-current={isActive(item.href) ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </li>
       </ul>
     </nav>
   </div>
@@ -119,6 +146,19 @@ function isActive(href: string) {
   .primary-nav a:hover { background: rgba(255, 255, 255, 0.08); color: var(--cream-50); }
   .primary-nav a.is-active { color: var(--gold-soft); }
 
+  /* --- "More" group: a flat labelled list on mobile, a dropdown on desktop --- */
+  .nav-more__btn { display: none; }
+  .nav-more__label {
+    display: block;
+    padding: 0.9rem 0.4rem 0.3rem;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 800;
+    color: var(--gold-soft);
+  }
+  .nav-more__menu { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.15rem; }
+
   @media (max-width: 919px) {
     .primary-nav.is-open {
       position: absolute;
@@ -128,14 +168,53 @@ function isActive(href: string) {
       background: var(--forest-700);
       padding-inline: var(--gutter);
       box-shadow: var(--shadow);
+      max-height: calc(100vh - 64px);
+      overflow-y: auto;
     }
   }
 
   @media (min-width: 920px) {
     .nav-toggle { display: none; }
     .primary-nav { display: block; }
-    .primary-nav ul { flex-direction: row; flex-wrap: wrap; padding: 0; gap: 0.1rem; }
+    .primary-nav > ul { flex-direction: row; flex-wrap: wrap; padding: 0; gap: 0.1rem; }
     .primary-nav a { padding: 0.4rem 0.7rem; font-size: 0.95rem; }
+
+    .nav-more { position: relative; }
+    .nav-more__label { display: none; }
+    .nav-more__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.4rem 0.7rem;
+      font-size: 0.95rem;
+      font-family: var(--font-body);
+      font-weight: 700;
+      color: var(--cream-100);
+      background: transparent;
+      border: 0;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .nav-more__btn:hover { background: rgba(255, 255, 255, 0.08); color: var(--cream-50); }
+    .nav-more__btn.is-active { color: var(--gold-soft); }
+    .nav-more__caret { transition: transform 0.15s ease; font-size: 0.8em; }
+    .nav-more__btn[aria-expanded='true'] .nav-more__caret { transform: rotate(180deg); }
+
+    .nav-more__menu {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: calc(100% + 0.4rem);
+      min-width: 200px;
+      background: var(--forest-700);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      padding: 0.35rem;
+      z-index: 60;
+    }
+    .nav-more__menu.is-open { display: block; }
+    .nav-more__menu a { white-space: nowrap; }
   }
 </style>
 
@@ -145,5 +224,33 @@ function isActive(href: string) {
   toggle?.addEventListener('click', () => {
     const open = nav?.classList.toggle('is-open');
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  // Desktop "More" dropdown. On mobile the button is hidden by CSS and the
+  // extras are always visible, so none of this runs.
+  const moreBtn = document.querySelector<HTMLButtonElement>('.nav-more__btn');
+  const moreMenu = document.getElementById('nav-extras');
+
+  function closeMore() {
+    moreMenu?.classList.remove('is-open');
+    moreBtn?.setAttribute('aria-expanded', 'false');
+  }
+
+  moreBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const open = moreMenu?.classList.toggle('is-open');
+    moreBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!moreMenu?.classList.contains('is-open')) return;
+    if (e.target instanceof Node && !moreMenu.contains(e.target)) closeMore();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && moreMenu?.classList.contains('is-open')) {
+      closeMore();
+      moreBtn?.focus();
+    }
   });
 </script>

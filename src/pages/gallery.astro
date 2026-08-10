@@ -1,26 +1,52 @@
 ---
+import fs from 'node:fs';
+import path from 'node:path';
 import Layout from '../layouts/Layout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Figure from '../components/Figure.astro';
 
-// Drop fieldwork photos into public/images/gorillas/ — name them 1.jpg, 2.jpg, …
-// then add/remove entries here to match. Missing files show a tasteful placeholder.
-const photos = Array.from({ length: 9 }, (_, i) => ({
-  src: `/images/gorillas/${i + 1}.jpg`,
+// Auto-discover every image in public/images/gorillas/ at build time, the same
+// way /people works. Drop photos into the folder and they appear here — no code
+// edit, no specific filenames required. Sorted by filename.
+const dir = path.join(process.cwd(), 'public', 'images', 'gorillas');
+let files: string[] = [];
+try {
+  files = fs
+    .readdirSync(dir)
+    .filter((f) => /\.(jpe?g|png|webp|gif|avif)$/i.test(f))
+    .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+} catch {
+  files = [];
+}
+
+const photos = files.map((file, i) => ({
+  src: `/images/gorillas/${file}`,
   alt: `Fieldwork photo ${i + 1}`,
 }));
 ---
 
 <Layout title="Gorilla Gallery" description="Fieldwork photos from the PhD years.">
-  <PageHeader eyebrow="Years of gorillas, parasites & fieldwork" title="Gorilla Gallery" lead="Snapshots from the field. Kelly: drop photos into public/images/gorillas/." />
+  <PageHeader
+    eyebrow="Years of gorillas, parasites & fieldwork"
+    title="Gorilla Gallery"
+    lead="Snapshots from four field seasons in Uganda — the animals, the mud, and the reason all of this happened."
+  />
 
   <section class="section">
     <div class="container">
-      <div class="gallery">
-        {photos.map((p) => (
-          <Figure src={p.src} alt={p.alt} label="public/images/gorillas/" ratio="1 / 1" />
-        ))}
-      </div>
+      {photos.length === 0 ? (
+        <div class="callout gallery-empty">
+          <span class="gallery-empty__icon">🦍</span>
+          <h3>Photos coming soon</h3>
+          <p class="muted">Kelly is still digging the good ones out of four field seasons' worth of memory cards. Check back before September.</p>
+        </div>
+      ) : (
+        <div class="gallery">
+          {photos.map((p) => (
+            <Figure src={p.src} alt={p.alt} label="Gorilla fieldwork" ratio="1 / 1" />
+          ))}
+        </div>
+      )}
     </div>
   </section>
 </Layout>
@@ -28,4 +54,6 @@ const photos = Array.from({ length: 9 }, (_, i) => ({
 <style>
   .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
   @media (min-width: 720px) { .gallery { grid-template-columns: repeat(3, 1fr); } }
+  .gallery-empty { text-align: center; }
+  .gallery-empty__icon { font-size: 2.5rem; display: block; margin-bottom: 0.5rem; }
 </style>

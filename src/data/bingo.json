@@ -1,7 +1,7 @@
 {
   "title": "PhD Defense Bingo",
   "subtitle": "Tick these off during the day. First to a full row wins a drink on Kelly.",
-  "_comment": "TBC: Kelly can swap in inside-jokes. Keep an odd number for a centre free space.",
+  "_comment": "Kelly can swap in inside-jokes. Keep the count at 24: it divides evenly by 4, 3 and 2, so the grid has no ragged trailing row at any screen size.",
   "squares": [
     "Someone says \"actually it's quite simple\"",
     "A laptop refuses to connect to the projector",
@@ -10,7 +10,7 @@
     "Someone asks about sample size",
     "A committee member goes off on a tangent",
     "Kelly says \"that's a great question\"",
-    "FREE SPACE 🦍",
+    "Someone asks if the gorillas were dangerous",
     "Someone arrives late and sits at the front",
     "A phone goes off",
     "Coffee runs out",
@@ -19,6 +19,13 @@
     "A question that's really just a comment",
     "Applause before it's officially over",
     "Someone asks \"so what's next?\"",
-    "A typo spotted on a slide"
+    "A typo spotted on a slide",
+    "A map of Uganda appears on a slide",
+    "A Latin species name gets mangled",
+    "The microphone cuts out",
+    "Someone says \"in my experience…\"",
+    "A slide has more text than anyone can read",
+    "Someone checks their watch mid-question",
+    "A photo of Kelly in muddy field kit"
   ]
 }

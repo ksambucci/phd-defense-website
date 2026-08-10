@@ -1,7 +1,7 @@
 {
   "title": "Beautiful People I've Met Along the Way",
   "subtitle": "The friends, colleagues and kindred spirits this PhD gave me. The real result of five years.",
-  "intro": "Photos and a few words for the people who made it. Kelly: just drop pictures into public/images/people/ — they appear here automatically. To add a name or caption, fill in the matching filename under 'captions' below (both are optional).",
+  "intro": "Photos and a few words for the people who made it — the ones who shared the fieldwork, the offices, the late nights and the very long coffees.",
   "_comment": "Photos auto-appear from public/images/people/, sorted by filename. Names/captions are OPTIONAL. To move a photo, give it a different sort-key under 'order' (the value is the filename whose position it should take). New photos don't need any entry here.",
   "order": {
     "DSC_0175.JPG": "IMG_20240608_082615_834.jpg",

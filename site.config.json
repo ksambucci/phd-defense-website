@@ -24,7 +24,8 @@
   },
 
   "rsvp": {
-    "_comment": "Build the form in Google Forms, then paste its embed src URL here (Send → < > Embed HTML → copy the src). formUrl is the plain shareable link as a fallback.",
+    "_comment": "TWO WAYS to collect RSVPs — pick one. (1) EASIEST: sign up free at formspree.io, create a form, and paste its endpoint (looks like https://formspree.io/f/abcdwxyz) into 'endpoint' below. The built-in form on this site then works immediately and replies land in your email. (2) Or build it in Google Forms and paste the embed src into 'formEmbedUrl' (Send → <> Embed HTML → copy the src). 'endpoint' wins if both are filled.",
+    "endpoint": "",
     "formEmbedUrl": "",
     "formUrl": ""
   },

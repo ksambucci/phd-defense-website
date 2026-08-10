@@ -2,10 +2,10 @@
   "heading": "The Friday Party",
   "intro": "The tram drops us at Železná Růže at 18:30 for dinner — and from there the real celebration begins.",
   "dinnerTitle": "Dinner",
-  "tbc": true,
+  "tbc": false,
   "details": [
     { "label": "Dinner", "value": "18:30 at Železná Růže, Hlinky 48" },
-    { "label": "Later venue", "value": "Where the night goes after dinner. [TBC]" },
+    { "label": "After dinner", "value": "Drinks and dancing in the city centre — we'll see where the night takes us." },
     { "label": "Timings", "value": "From 18:30 until late." },
     { "label": "Dress code", "value": "Whatever survives the tram." }
   ],

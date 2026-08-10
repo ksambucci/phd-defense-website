@@ -16,7 +16,7 @@ const photos = Array.from({ length: 14 }, (_, i) => `/images/tram/foto${i}.jpg`)
       <!-- Gallery -->
       <div class="tram-gallery">
         {photos.map((src, i) => (
-          <Figure src={src} alt={`Party tram photo ${i + 1}`} label="public/images/tram/" ratio="4 / 3" />
+          <Figure src={src} alt={`Party tram photo ${i + 1}`} label="Party tram" ratio="4 / 3" />
         ))}
       </div>
       <p class="muted tram-credit">

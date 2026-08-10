@@ -39,12 +39,12 @@ const people = files.map((file) => ({
       <p class="lead">{data.intro}</p>
 
       {people.length === 0 ? (
-        <p class="muted">No photos yet — drop some into <code>public/images/people/</code>.</p>
+        <p class="muted">Photos coming soon.</p>
       ) : (
         <div class="people-grid">
           {people.map((p, i) => (
             <figure class="person">
-              <Figure src={p.src} alt={p.name || `Friend ${i + 1}`} label="public/images/people/" ratio="1 / 1" />
+              <Figure src={p.src} alt={p.name || `Friend ${i + 1}`} label="Photo coming soon" ratio="1 / 1" />
               {(p.name || p.caption) && (
                 <figcaption class="person__cap">
                   {p.name && <span class="person__name">{p.name}</span>}

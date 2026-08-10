@@ -4,8 +4,8 @@
     { "q": "Can I come only to the party?", "a": "Absolutely. Plenty of people will." },
     { "q": "What should I wear?", "a": "Smart casual for the defense; whatever survives the tram for the party." },
     { "q": "Will everything be in English?", "a": "Yes." },
-    { "q": "Can children come?", "a": "[Kelly's choice — to confirm.]" },
-    { "q": "Can partners come?", "a": "[Kelly's choice — to confirm.]" },
+    { "q": "Can children come?", "a": "Yes — children are welcome." },
+    { "q": "Can partners come?", "a": "Yes — bring your partner." },
     { "q": "Gifts?", "a": "Your presence is enough — honestly, no gifts needed. But if you'd like to mark the occasion, I'd be touched if you donated to Persefona, a Brno charity close to my heart that supports people affected by domestic and sexual violence.", "donation": true },
     { "q": "How do I get from the airport?", "a": "See the Travel page for every route in and out.", "travelLink": true }
   ]

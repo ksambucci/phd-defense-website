@@ -14,7 +14,7 @@
       { "q": "How long does it last?", "a": "Roughly a few hours from arrival to decision. [Kelly to confirm.]" },
       { "q": "What's the dress code?", "a": "Smart casual." },
       { "q": "When do photos happen?", "a": "After the decision is announced. [Kelly to confirm.]" },
-      { "q": "When do celebrations begin?", "a": "Straight after — drinks, then we board the party tram at 16:30. It drops us off for dinner at 18:30." }
+      { "q": "When do celebrations begin?", "a": "Straight after — drinks, then we board the party tram at 16:30. It drops us at Železná Růže for dinner at 18:30." }
     ]
   },
   "schedule": {
@@ -27,7 +27,7 @@
       { "time": "15:45", "what": "Decision announced (approx.)" },
       { "time": "16:00", "what": "Photos & first drinks (approx.)" },
       { "time": "16:30", "what": "Board the party tram" },
-      { "time": "18:30", "what": "Tram drops us for dinner" }
+      { "time": "18:30", "what": "Dinner at Železná Růže" }
     ]
   }
 }

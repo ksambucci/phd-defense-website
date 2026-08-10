@@ -1,12 +1,13 @@
 {
   "heading": "The Friday Party",
-  "intro": "After the tram rolls in, the real celebration begins.",
+  "intro": "The tram drops us at Železná Růže at 18:30 for dinner — and from there the real celebration begins.",
+  "dinnerTitle": "Dinner",
   "tbc": true,
   "details": [
-    { "label": "Venue", "value": "[TBC]" },
-    { "label": "Timings", "value": "Friday night, from when the tram arrives until late. [TBC.]" },
-    { "label": "Dress code", "value": "Whatever survives the tram." },
-    { "label": "Food & drinks", "value": "[TBC]" }
+    { "label": "Dinner", "value": "18:30 at Železná Růže, Hlinky 48" },
+    { "label": "Later venue", "value": "Where the night goes after dinner. [TBC]" },
+    { "label": "Timings", "value": "From 18:30 until late." },
+    { "label": "Dress code", "value": "Whatever survives the tram." }
   ],
   "houseRule": "The only rule is that nobody is allowed to ask about reviewer comments."
 }

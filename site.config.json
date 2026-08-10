@@ -53,6 +53,15 @@
       "lng": 16.5974,
       "mapsLink": "https://www.google.com/maps/search/?api=1&query=49.2051,16.5974",
       "embedQuery": "Kotlářská+2,+602+00+Brno-střed"
+    },
+    "dinnerVenue": {
+      "_comment": "CONFIRMED venue. Address taken from public listings (Yelp / firmy.cz) — worth a sanity check by Kelly.",
+      "name": "Železná Růže",
+      "address": "Hlinky 48, 603 00 Brno",
+      "note": "In Staré Brno, by the BVV exhibition grounds.",
+      "website": "https://www.zeleznaruze.cz/",
+      "mapsLink": "https://www.google.com/maps/search/?api=1&query=%C5%BDelezn%C3%A1+R%C5%AF%C5%BEe%2C+Hlinky+48%2C+Brno",
+      "embedQuery": "Železná Růže, Hlinky 48, Brno"
     }
   },
 

@@ -1,15 +1,33 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PageHeader from '../components/PageHeader.astro';
+import MapEmbed from '../components/MapEmbed.astro';
 import party from '../data/party.json';
+import siteConfig from '../../site.config.json';
+
+const dinner = siteConfig.maps.dinnerVenue;
 ---
 
-<Layout title="Friday Party" description="The main celebration after the tram.">
+<Layout title="Friday Party" description="Dinner at Železná Růže, then the main celebration after the tram.">
   <PageHeader eyebrow="The main event" title={party.heading} lead={party.intro} />
 
   <section class="section">
     <div class="container">
       <div class="rule-banner">“{party.houseRule}”</div>
+
+      <h2 style="margin-top:2.5rem">{party.dinnerTitle}</h2>
+      <div class="party-grid">
+        <div class="card venue-card">
+          <p><strong>{dinner.name}</strong></p>
+          <p>{dinner.address}</p>
+          <p class="muted">{dinner.note}</p>
+          <div class="venue-card__links">
+            <a class="btn btn--ghost" href={dinner.mapsLink} target="_blank" rel="noopener">Open in Google Maps ↗</a>
+            <a class="btn btn--ghost" href={dinner.website} target="_blank" rel="noopener">Restaurant website ↗</a>
+          </div>
+        </div>
+        <MapEmbed query={dinner.embedQuery} title="Map of the dinner venue" />
+      </div>
 
       <h2 style="margin-top:2.5rem">The details {party.tbc && <span class="tbc">TBC</span>}</h2>
       <div class="grid grid--2">
@@ -26,6 +44,10 @@ import party from '../data/party.json';
 
 <style>
   h2 .tbc { margin-left: 0.5rem; vertical-align: middle; }
+  .party-grid { display: grid; gap: 1.5rem; }
+  @media (min-width: 820px) { .party-grid { grid-template-columns: 1fr 1fr; align-items: start; } }
+  .venue-card { display: flex; flex-direction: column; gap: 0.4rem; align-items: flex-start; }
+  .venue-card__links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.6rem; }
   .detail { display: flex; flex-direction: column; gap: 0.3rem; }
   .detail__label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 800; color: var(--gold); }
   .detail__value { font-size: 1.1rem; }

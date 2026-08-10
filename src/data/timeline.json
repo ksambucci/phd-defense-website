@@ -1,0 +1,21 @@
+{
+  "title": "Kelly's PhD Journey",
+  "subtitle": "September 2021 → September 2026",
+  "_comment": "Real milestones below. Add 2025 entries (writing up, submission, etc.) whenever ready — just copy a block.",
+  "milestones": [
+    { "date": "Sep 2021", "title": "Moved to Brno", "body": "Packed up and moved to Brno to start the PhD at Masaryk University." },
+    { "date": "Oct 2021", "title": "First field season — Uganda", "body": "Off to Uganda for the very first field season with the gorillas." },
+    { "date": "Apr 2022", "title": "Second field season — Uganda", "body": "Back to Uganda for round two." },
+    { "date": "Sep 2022", "title": "Internship in California", "body": "A research internship in California." },
+    { "date": "Nov 2022", "title": "Third field season — Uganda", "body": "Third trip to the field in Uganda." },
+    { "date": "Jul 2023", "title": "Rwanda — ICCB", "body": "Rwanda for the International Congress for Conservation Biology." },
+    { "date": "Jan 2024", "title": "Gorilla shit by train", "body": "Personally delivered gorilla samples by train from the Czech Republic to Belgium. Yes, really." },
+    { "date": "Jul 2024", "title": "Parasitology summer school — Romania", "body": "Parasitology summer school in Romania." },
+    { "date": "Aug 2024", "title": "Fourth field trip — Uganda", "body": "Fourth and final field trip to Uganda." },
+    { "date": "Jan 2025", "title": "Funding cut", "body": "The Trump administration cut research funding — a curveball for the project." },
+    { "date": "Jul 2025", "title": "Moved to the Netherlands", "body": "Relocated to the Netherlands to write up." },
+    { "date": "Apr 2026", "title": "First paper published", "body": "First paper out in the world. Officially in print." },
+    { "date": "Jul 2026", "title": "Thesis submitted", "body": "Thesis handed in. The end is in sight." },
+    { "date": "Sep 2026", "title": "The Defense", "body": "Going ape shit in Brno. You're invited." }
+  ]
+}

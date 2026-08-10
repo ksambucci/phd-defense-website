@@ -1,0 +1,53 @@
+---
+import { asset } from '../lib/url';
+// Image with a graceful placeholder. If `src` is omitted OR the file is missing,
+// a tasteful forest-green block with a label renders instead, so layout never breaks.
+interface Props {
+  src?: string;
+  alt?: string;
+  label?: string;
+  ratio?: string;
+  rounded?: boolean;
+}
+const { src, alt = '', label = 'Photo coming soon', ratio = '4 / 3', rounded = true } = Astro.props;
+const resolved = src ? asset(src) : '';
+---
+<figure class={`figure ${rounded ? 'figure--rounded' : ''}`} style={`--ratio:${ratio}`}>
+  {resolved ? (
+    <img src={resolved} alt={alt} loading="lazy" onerror="this.parentElement.classList.add('figure--fallback')" />
+  ) : null}
+  <span class="figure__placeholder" aria-hidden={resolved ? 'true' : 'false'}>
+    <span class="figure__icon">🦍</span>
+    <span class="figure__label">{label}</span>
+  </span>
+</figure>
+
+<style>
+  .figure {
+    position: relative;
+    aspect-ratio: var(--ratio);
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--forest-600), var(--forest-800));
+    margin: 0;
+  }
+  .figure--rounded { border-radius: var(--radius); }
+  .figure img { width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 1; }
+  .figure__placeholder {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    color: var(--cream-200);
+    text-align: center;
+    padding: 1rem;
+  }
+  .figure__icon { font-size: clamp(1.8rem, 6vw, 3rem); opacity: 0.85; }
+  .figure__label { font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; opacity: 0.85; }
+  /* When an <img> fails to load, JS adds .figure--fallback to reveal the placeholder. */
+  .figure--fallback img { display: none; }
+  .figure--fallback .figure__placeholder { z-index: 2; }
+</style>

@@ -1,0 +1,12 @@
+{
+  "heading": "The Friday Party",
+  "intro": "After the tram rolls in, the real celebration begins.",
+  "tbc": true,
+  "details": [
+    { "label": "Venue", "value": "[TBC]" },
+    { "label": "Timings", "value": "Friday night, from when the tram arrives until late. [TBC.]" },
+    { "label": "Dress code", "value": "Whatever survives the tram." },
+    { "label": "Food & drinks", "value": "[TBC]" }
+  ],
+  "houseRule": "The only rule is that nobody is allowed to ask about reviewer comments."
+}

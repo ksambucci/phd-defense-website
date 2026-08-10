@@ -1,0 +1,149 @@
+---
+import { mainNav } from '../lib/nav';
+import { url } from '../lib/url';
+import siteConfig from '../../site.config.json';
+
+const { pathname } = Astro.url;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+function isActive(href: string) {
+  const target = (base + href).replace(/\/$/, '') || '/';
+  const here = pathname.replace(/\/$/, '') || '/';
+  return target === here;
+}
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href={url('/')}>
+      <span class="brand__mark" aria-hidden="true">🦍</span>
+      <span class="brand__text">{siteConfig.branding.title}</span>
+    </a>
+
+    <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle menu">
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
+
+    <nav id="primary-nav" class="primary-nav" aria-label="Primary">
+      <ul>
+        {mainNav.map((item) => (
+          <li>
+            <a
+              href={url(item.href)}
+              class={isActive(item.href) ? 'is-active' : ''}
+              aria-current={isActive(item.href) ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(29, 61, 42, 0.96);
+    backdrop-filter: blur(8px);
+    color: var(--cream-50);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 64px;
+    gap: 1rem;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--cream-50);
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.25rem;
+    letter-spacing: -0.01em;
+  }
+  .brand__mark { font-size: 1.4rem; }
+
+  .nav-toggle {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    padding: 10px;
+  }
+  .nav-toggle__bar {
+    height: 2px;
+    width: 100%;
+    background: var(--cream-50);
+    border-radius: 2px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .nav-toggle[aria-expanded='true'] .nav-toggle__bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle[aria-expanded='true'] .nav-toggle__bar:nth-child(2) { opacity: 0; }
+  .nav-toggle[aria-expanded='true'] .nav-toggle__bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .primary-nav { display: none; }
+  .primary-nav.is-open { display: block; }
+
+  .primary-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+  .primary-nav a {
+    display: block;
+    padding: 0.6rem 0.4rem;
+    color: var(--cream-100);
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 10px;
+  }
+  .primary-nav a:hover { background: rgba(255, 255, 255, 0.08); color: var(--cream-50); }
+  .primary-nav a.is-active { color: var(--gold-soft); }
+
+  @media (max-width: 919px) {
+    .primary-nav.is-open {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 100%;
+      background: var(--forest-700);
+      padding-inline: var(--gutter);
+      box-shadow: var(--shadow);
+    }
+  }
+
+  @media (min-width: 920px) {
+    .nav-toggle { display: none; }
+    .primary-nav { display: block; }
+    .primary-nav ul { flex-direction: row; flex-wrap: wrap; padding: 0; gap: 0.1rem; }
+    .primary-nav a { padding: 0.4rem 0.7rem; font-size: 0.95rem; }
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector('.nav-toggle');
+  const nav = document.getElementById('primary-nav');
+  toggle?.addEventListener('click', () => {
+    const open = nav?.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+</script>

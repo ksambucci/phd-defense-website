@@ -1,0 +1,4 @@
+# Private guest-info site for a personal event.
+# Reachable by anyone with the link, but asked not to be indexed.
+User-agent: *
+Disallow: /

@@ -1,0 +1,25 @@
+{
+  "title": "Beautiful People I've Met Along the Way",
+  "subtitle": "The friends, colleagues and kindred spirits this PhD gave me. The real result of five years.",
+  "intro": "Photos and a few words for the people who made it. Kelly: just drop pictures into public/images/people/ — they appear here automatically. To add a name or caption, fill in the matching filename under 'captions' below (both are optional).",
+  "_comment": "Photos auto-appear from public/images/people/, sorted by filename. Names/captions are OPTIONAL. To move a photo, give it a different sort-key under 'order' (the value is the filename whose position it should take). New photos don't need any entry here.",
+  "order": {
+    "DSC_0175.JPG": "IMG_20240608_082615_834.jpg",
+    "IMG_20240608_082615_834.jpg": "DSC_0175.JPG"
+  },
+  "captions": {
+    "PXL_20251206_095540093.jpg": { "name": "", "caption": "" },
+    "PXL_20251222_185501987.jpg": { "name": "", "caption": "" },
+    "PXL_20260118_104643904.jpg": { "name": "", "caption": "" },
+    "PXL_20260120_161517801.jpg": { "name": "", "caption": "" },
+    "PXL_20260123_074250400.jpg": { "name": "", "caption": "" },
+    "PXL_20260413_111051372.jpg": { "name": "", "caption": "" },
+    "PXL_20260414_145130991.jpg": { "name": "", "caption": "" },
+    "PXL_20260416_121806799.jpg": { "name": "", "caption": "" },
+    "PXL_20260417_173531480.jpg": { "name": "", "caption": "" },
+    "PXL_20260417_194425232.jpg": { "name": "", "caption": "" },
+    "IMG-20260516-WA0007.jpg": { "name": "", "caption": "" },
+    "IMG-20260517-WA0011.jpg": { "name": "", "caption": "" },
+    "DSC_0188.JPG": { "name": "", "caption": "" }
+  }
+}

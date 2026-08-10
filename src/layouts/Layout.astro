@@ -1,0 +1,66 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import siteConfig from '../../site.config.json';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const fullTitle = title
+  ? `${title} — ${siteConfig.branding.title}`
+  : `${siteConfig.branding.title} — ${siteConfig.branding.subtitle}`;
+const desc = description ?? siteConfig.branding.tagline;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={desc} />
+    <!-- Private guest-info site: reachable by link, but kept out of search results. -->
+    <meta name="robots" content="noindex, nofollow" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#1d3d2a" />
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`.replace(/\/\//g, '/')} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Nunito+Sans:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Nav />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+
+    <style>
+      body { display: flex; flex-direction: column; min-height: 100vh; }
+      main { flex: 1; }
+      .skip-link {
+        position: absolute;
+        left: -9999px;
+        top: 0;
+        background: var(--gold);
+        color: var(--forest-900);
+        padding: 0.6rem 1rem;
+        z-index: 100;
+        font-weight: 800;
+        border-radius: 0 0 8px 0;
+      }
+      .skip-link:focus { left: 0; }
+    </style>
+  </body>
+</html>

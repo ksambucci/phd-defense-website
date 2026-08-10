@@ -1,0 +1,74 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Figure from '../components/Figure.astro';
+import data from '../data/people.json';
+
+// Auto-discover every image in public/images/people/ at build time.
+// Just drop photos in the folder — they appear here automatically, sorted by filename.
+// Optional names/captions live in src/data/people.json, keyed by exact filename.
+const dir = path.join(process.cwd(), 'public', 'images', 'people');
+// Optional ordering overrides: map a filename to the sort-key it should sort *as*.
+// Used to nudge specific photos around without renaming files (see people.json → "order").
+const order: Record<string, string> = (data as { order?: Record<string, string> }).order ?? {};
+let files: string[] = [];
+try {
+  files = fs
+    .readdirSync(dir)
+    .filter((f) => /\.(jpe?g|png|webp|gif|avif)$/i.test(f))
+    .sort((a, b) => (order[a] ?? a).localeCompare(order[b] ?? b));
+} catch {
+  files = [];
+}
+
+const captions: Record<string, { name?: string; caption?: string }> = data.captions ?? {};
+const people = files.map((file) => ({
+  src: `/images/people/${file}`,
+  name: captions[file]?.name ?? '',
+  caption: captions[file]?.caption ?? '',
+}));
+---
+
+<Layout title="Beautiful People" description="The friends and kindred spirits Kelly met during the PhD.">
+  <PageHeader eyebrow="The real result of five years" title={data.title} lead={data.subtitle} />
+
+  <section class="section">
+    <div class="container">
+      <p class="lead">{data.intro}</p>
+
+      {people.length === 0 ? (
+        <p class="muted">No photos yet — drop some into <code>public/images/people/</code>.</p>
+      ) : (
+        <div class="people-grid">
+          {people.map((p, i) => (
+            <figure class="person">
+              <Figure src={p.src} alt={p.name || `Friend ${i + 1}`} label="public/images/people/" ratio="1 / 1" />
+              {(p.name || p.caption) && (
+                <figcaption class="person__cap">
+                  {p.name && <span class="person__name">{p.name}</span>}
+                  {p.caption && <span class="person__note">{p.caption}</span>}
+                </figcaption>
+              )}
+            </figure>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .people-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  @media (min-width: 720px) { .people-grid { grid-template-columns: repeat(3, 1fr); } }
+  .person { margin: 0; }
+  .person__cap { display: block; margin-top: 0.5rem; }
+  .person__name { display: block; font-family: var(--font-display); font-weight: 600; color: var(--forest-800); }
+  .person__note { display: block; font-size: 0.9rem; color: var(--ink-soft); }
+</style>

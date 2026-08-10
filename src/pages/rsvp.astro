@@ -1,0 +1,76 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import siteConfig from '../../site.config.json';
+
+const { formEmbedUrl, formUrl } = siteConfig.rsvp;
+const questions = [
+  'Full name',
+  'Email',
+  'Mobile incl. country code',
+  'Can you make it? (Yes / Can\'t make it / Not sure)',
+  'Which bits will you join? (Thursday drinks / Friday defense / party tram / Friday party / reservoir weekend)',
+  'Arrival day (Thursday / Friday / Other)',
+  'Departure day (Saturday / Sunday / Monday / Tuesday / Other)',
+  'Travel route (Direct to Brno / via Vienna / via Bratislava / via Prague / Driving / Not sure)',
+  'Accommodation (Booked / Want a recommendation / Hoping for the reservoir house / Not sorted)',
+  'Dietary requirements / allergies',
+  'Bringing anyone? (Just me / Partner / Children + how many & ages)',
+  'A song for the tram/party (optional)',
+  'Questions or messages (optional)',
+];
+---
+
+<Layout title="RSVP" description="Let Kelly know if you can make it.">
+  <PageHeader eyebrow="Yes, you" title="RSVP" lead="One quick form. It helps Kelly plan everything from the tram to the reservoir beds." />
+
+  <section class="section">
+    <div class="container rsvp-wrap">
+      {formEmbedUrl ? (
+        <div class="rsvp-frame">
+          <iframe
+            src={formEmbedUrl}
+            title="RSVP form"
+            width="100%"
+            height="1400"
+            frameborder="0"
+            marginheight="0"
+            marginwidth="0"
+            loading="lazy"
+          >Loading…</iframe>
+        </div>
+      ) : (
+        <div class="callout rsvp-placeholder">
+          <h3>RSVP form coming soon <span class="tbc">form URL TBC</span></h3>
+          <p>Kelly: build the form in Google Forms, then paste its embed URL into <code>site.config.json</code> → <code>rsvp.formEmbedUrl</code>. It'll appear right here.</p>
+          {formUrl && (
+            <p><a class="btn btn--gold" href={formUrl} target="_blank" rel="noopener">Open the RSVP form ↗</a></p>
+          )}
+          <details class="rsvp-questions">
+            <summary>Planned form questions</summary>
+            <ol>
+              {questions.map((q) => <li>{q}</li>)}
+            </ol>
+          </details>
+        </div>
+      )}
+
+      {formEmbedUrl && formUrl && (
+        <p class="muted center" style="margin-top:1rem">
+          Form not loading? <a href={formUrl} target="_blank" rel="noopener">Open it in a new tab ↗</a>
+        </p>
+      )}
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .rsvp-wrap { max-width: 820px; }
+  .rsvp-frame { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  .rsvp-frame iframe { display: block; width: 100%; }
+  .rsvp-placeholder code { background: rgba(255,255,255,0.12); padding: 0.1rem 0.4rem; border-radius: 6px; }
+  .rsvp-questions { margin-top: 1rem; }
+  .rsvp-questions summary { cursor: pointer; font-weight: 700; }
+  .rsvp-questions ol { margin-top: 0.8rem; padding-left: 1.3rem; }
+  .rsvp-questions li { margin-bottom: 0.4rem; }
+</style>

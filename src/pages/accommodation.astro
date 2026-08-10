@@ -1,0 +1,44 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import MapEmbed from '../components/MapEmbed.astro';
+import accommodation from '../data/accommodation.json';
+
+function hostname(u: string) {
+  try { return new URL(u).hostname.replace(/^www\./, ''); } catch { return u; }
+}
+---
+
+<Layout title="Accommodation" description="Where to stay in Brno — central, good value, or at the reservoir.">
+  <PageHeader eyebrow="Where to stay" title="Accommodation" lead={accommodation.lead} />
+
+  <section class="section">
+    <div class="container">
+      <MapEmbed query="Brno+city+centre" title="Map of central Brno" />
+
+      {accommodation.groups.map((group) => (
+        <div class="accom-group">
+          <h2>{group.title}</h2>
+          <div class="grid grid--3">
+            {group.hotels.map((h) => (
+              <div class="card">
+                <h3>{h.name}</h3>
+                <p class="muted">{h.blurb}</p>
+                {h.url && (
+                  <a class="btn btn--ghost" href={h.url} target="_blank" rel="noopener">{hostname(h.url)} ↗</a>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .accom-group { margin-top: 2.5rem; }
+  .accom-group h2 { margin-bottom: 1rem; }
+  .accom-group .card { display: flex; flex-direction: column; gap: 0.6rem; align-items: flex-start; }
+  .accom-group .card .btn { margin-top: auto; }
+</style>

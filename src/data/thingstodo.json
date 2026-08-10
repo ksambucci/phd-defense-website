@@ -1,0 +1,58 @@
+{
+  "intro": "The classic sights and Kelly's personal picks. Almost everything is a ~10-min walk from the main square.",
+  "kellysPicks": {
+    "title": "⭐ Kelly's Picks",
+    "blurb": "Lead with these — they're the personal heart of the page.",
+    "places": [
+      { "name": "Bistro Bastardo", "blurb": "Matthijs' favourite Mexican. On nám. Svobody.", "url": "https://bistrobastardo.com" },
+      { "name": "Klárabára Winecafé", "blurb": "Kelly's favourite wine bar; lovely Moravian wines, owners pick for you. (Closed Sun.)", "url": "https://kbwinecafe.cz" },
+      { "name": "La Famiglia", "blurb": "Mum & Dad's favourite Italian.", "url": "https://lafamigliabrno.cz" },
+      { "name": "William Thomas Artisan Bakery", "blurb": "Best croissant in Brno (go in the morning before they sell out).", "url": "https://wtbakery.cz" },
+      { "name": "Ještě jednu", "blurb": "Best ice cream. Yes, Niall, this one's for you. Artisan gelato, seasonal flavours, gloriously erratic opening hours.", "url": "https://jestejednu.cz" },
+      { "name": "The Bar That Doesn't Exist", "blurb": "Best cocktails.", "url": "https://barkteryneexistuje.cz" },
+      { "name": "Queen's Pub", "blurb": "For a spot of darts (and bait to lure Brit & Phil out). Live music, Guinness.", "url": "https://queenspubbrno.cz" },
+      { "name": "Pivovarský dům Poupě", "blurb": "Your brother's favourite, for the tabletop curling. Central brewpub on Dominikánská with its own beers. (Closed Sun.)", "url": "" }
+    ]
+  },
+  "mustSee": {
+    "title": "Must-see",
+    "items": ["Špilberk Castle", "Cathedral of SS Peter & Paul", "Villa Tugendhat", "Underground Brno", "the Ossuary", "the 10-Z nuclear bunker"]
+  },
+  "nature": {
+    "title": "Nature",
+    "items": ["the Brno reservoir", "Veveří Castle", "Holedná forest"]
+  },
+  "moreSpots": {
+    "title": "More good spots",
+    "blurb": "Secondary to Kelly's Picks — for guests who want extra options.",
+    "categories": [
+      {
+        "title": "☕ Coffee",
+        "places": [
+          { "name": "Monogram Espresso Bar", "blurb": "The city's flagship specialty bar, by the station. (Closed Sun.)" },
+          { "name": "But First Coffee", "blurb": "Cosy, world-map magnet wall, opens 7am. (Weekdays only.)" },
+          { "name": "Pikolo Espresso Bar", "blurb": "Tiny stylish gem, superb oat-milk coffee. Seats ~6." },
+          { "name": "KIMONO coffee", "blurb": "Corner spot, one of Brno's best terraces, lovely desserts." }
+        ]
+      },
+      {
+        "title": "🍽️ Eat",
+        "places": [
+          { "name": "Vittorio", "blurb": "Polished Mediterranean/Italian; the spot for a proper nice dinner. (Closed Sun.)" },
+          { "name": "Lokál U Caipla", "blurb": "Classic Czech done well, tank Pilsner, great value. Reserve." },
+          { "name": "Pivnice U Čápa", "blurb": "Hearty Czech pub near Veveří; svíčková, pork knuckle. Good for family." },
+          { "name": "Nok Nok", "blurb": "Modern, varied, English menu; easy middle-ground for a mixed group." },
+          { "name": "Stopkova Plzeňská Pivnice", "blurb": "Iconic central beer hall; roast duck, Pilsner. (Touristy but reliable.)" }
+        ]
+      },
+      {
+        "title": "🍸 Drink",
+        "places": [
+          { "name": "Super Panda Circus", "blurb": "Immersive speakeasy, no menu, ring the bell. Reserve." },
+          { "name": "Satin Bar & Café", "blurb": "Intimate, bartender's-choice. (Thu–Sat.)" },
+          { "name": "Whiskáč na Jakubáku", "blurb": "Whisky bar with Brno-themed cocktails (same passage as Queen's Pub)." }
+        ]
+      }
+    ]
+  }
+}

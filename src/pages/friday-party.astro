@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import party from '../data/party.json';
+---
+
+<Layout title="Friday Party" description="The main celebration after the tram.">
+  <PageHeader eyebrow="The main event" title={party.heading} lead={party.intro} />
+
+  <section class="section">
+    <div class="container">
+      <div class="rule-banner">“{party.houseRule}”</div>
+
+      <h2 style="margin-top:2.5rem">The details {party.tbc && <span class="tbc">TBC</span>}</h2>
+      <div class="grid grid--2">
+        {party.details.map((d) => (
+          <div class="card detail">
+            <span class="detail__label">{d.label}</span>
+            <span class="detail__value">{d.value}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  h2 .tbc { margin-left: 0.5rem; vertical-align: middle; }
+  .detail { display: flex; flex-direction: column; gap: 0.3rem; }
+  .detail__label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 800; color: var(--gold); }
+  .detail__value { font-size: 1.1rem; }
+</style>

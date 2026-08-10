@@ -1,0 +1,55 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Figure from '../components/Figure.astro';
+import MapEmbed from '../components/MapEmbed.astro';
+import reservoir from '../data/reservoir.json';
+---
+
+<Layout title="Reservoir Weekend" description="A lakeside house weekend by the Brno reservoir.">
+  <PageHeader eyebrow="The weekend on" title={reservoir.heading} lead={reservoir.intro} />
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid--2 res-top">
+        <div class="card house-card">
+          <h2>The house</h2>
+          <p><strong>{reservoir.house.name}</strong></p>
+          <p class="muted">{reservoir.house.blurb}</p>
+          <a class="btn btn--primary" href={reservoir.house.url} target="_blank" rel="noopener">View the house ↗</a>
+          <ul class="logistics">
+            <li><span>Arrival</span> {reservoir.logistics.arrival}</li>
+            <li><span>Departure</span> {reservoir.logistics.departure}</li>
+            <li><span>Who</span> {reservoir.logistics.who}</li>
+          </ul>
+        </div>
+        <Figure src="/images/reservoir/house.jpg" alt="The reservoir house" label="public/images/reservoir/" ratio="4 / 3" />
+      </div>
+
+      <h2 style="margin-top:2.5rem">Things to do at the lake</h2>
+      <ul class="activities">
+        {reservoir.activities.map((a) => <li>{a}</li>)}
+      </ul>
+
+      <div class="grid grid--2 res-map" style="margin-top:2.5rem">
+        <MapEmbed query="Brno+reservoir+Prygl" title="Map of the Brno reservoir" />
+        <div class="callout">
+          <h3>Can't fit in the house?</h3>
+          <p>{reservoir.overflow.note}</p>
+          <a class="btn btn--gold" href={reservoir.overflow.url} target="_blank" rel="noopener">{reservoir.overflow.name} ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .res-top { align-items: start; }
+  .house-card { display: flex; flex-direction: column; gap: 0.6rem; align-items: flex-start; }
+  .logistics { list-style: none; padding: 0; margin: 0.8rem 0 0; width: 100%; }
+  .logistics li { padding: 0.5rem 0; border-top: 1px solid var(--line); }
+  .logistics span { display: inline-block; min-width: 90px; font-weight: 800; color: var(--forest-600); }
+  .activities { columns: 2; gap: 1.5rem; padding-left: 1.2rem; }
+  .activities li { margin-bottom: 0.5rem; }
+  .res-map { align-items: stretch; }
+</style>

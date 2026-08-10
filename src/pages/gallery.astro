@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Figure from '../components/Figure.astro';
+
+// Drop fieldwork photos into public/images/gorillas/ — name them 1.jpg, 2.jpg, …
+// then add/remove entries here to match. Missing files show a tasteful placeholder.
+const photos = Array.from({ length: 9 }, (_, i) => ({
+  src: `/images/gorillas/${i + 1}.jpg`,
+  alt: `Fieldwork photo ${i + 1}`,
+}));
+---
+
+<Layout title="Gorilla Gallery" description="Fieldwork photos from the PhD years.">
+  <PageHeader eyebrow="Years of gorillas, parasites & fieldwork" title="Gorilla Gallery" lead="Snapshots from the field. Kelly: drop photos into public/images/gorillas/." />
+
+  <section class="section">
+    <div class="container">
+      <div class="gallery">
+        {photos.map((p) => (
+          <Figure src={p.src} alt={p.alt} label="public/images/gorillas/" ratio="1 / 1" />
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+  @media (min-width: 720px) { .gallery { grid-template-columns: repeat(3, 1fr); } }
+</style>

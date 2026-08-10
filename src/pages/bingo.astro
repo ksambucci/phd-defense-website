@@ -1,0 +1,73 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import bingo from '../data/bingo.json';
+---
+
+<Layout title="PhD Bingo" description="Defense-day bingo. First to a full row wins a drink.">
+  <PageHeader eyebrow="A spectator sport" title={bingo.title} lead={bingo.subtitle} />
+
+  <section class="section">
+    <div class="container">
+      <div class="bingo">
+        {bingo.squares.map((square) => (
+          <button class="bingo__cell" type="button" aria-pressed="false">
+            <span>{square}</span>
+          </button>
+        ))}
+      </div>
+      <p class="muted center" style="margin-top:1.5rem">Tap a square to mark it. (Just for fun — nothing is saved.)</p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .bingo {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+  }
+  @media (min-width: 640px) { .bingo { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 900px) { .bingo { grid-template-columns: repeat(4, 1fr); } }
+  .bingo__cell {
+    aspect-ratio: 1 / 1;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 0.8rem;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--forest-800);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1.25;
+    transition: background 0.15s ease, transform 0.1s ease;
+  }
+  .bingo__cell:hover { transform: translateY(-2px); }
+  .bingo__cell[aria-pressed='true'] {
+    background: var(--forest-600);
+    color: var(--cream-50);
+    border-color: var(--forest-600);
+  }
+  .bingo__cell[aria-pressed='true']::after {
+    content: '✓';
+    position: absolute;
+    margin-top: -2.5rem;
+    margin-left: 2.5rem;
+    color: var(--gold-soft);
+    font-size: 1.2rem;
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.bingo__cell').forEach((cell) => {
+    cell.addEventListener('click', () => {
+      const pressed = cell.getAttribute('aria-pressed') === 'true';
+      cell.setAttribute('aria-pressed', pressed ? 'false' : 'true');
+    });
+  });
+</script>

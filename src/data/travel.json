@@ -1,0 +1,59 @@
+{
+  "lead": "Fly into Brno if you can — otherwise Vienna.",
+  "gateways": [
+    {
+      "name": "Brno (BRQ)",
+      "tag": "direct",
+      "highlight": true,
+      "flyFromUK": "Ryanair from Stansted only, ~2h05, ~5/week (Tue–Sat), £15–35",
+      "thenToBrno": "You're there (8 km / ~15 min to centre)",
+      "roughTotal": "~2h flying",
+      "bestFor": "Simplest. Anyone leaving by Saturday",
+      "mapsQuery": "Brno+Airport+to+Brno+centre"
+    },
+    {
+      "name": "Vienna (VIE)",
+      "tag": "best all-rounder",
+      "highlight": false,
+      "flyFromUK": "Austrian & BA from Heathrow, Ryanair from Stansted, Wizz/easyJet from Luton/Gatwick; regional UK via Jet2 (Manchester, Edinburgh, Bristol, Glasgow, Newcastle, Leeds). ~daily, ~2h15, from ~£55",
+      "thenToBrno": "RegioJet bus from the airport, hourly, every day, ~2h10, ~€12",
+      "roughTotal": "~4–4.5h",
+      "bestFor": "Best all-rounder. Regional UK family + anyone needing Sun/Mon returns",
+      "mapsQuery": "Vienna+Airport+to+Brno"
+    },
+    {
+      "name": "Bratislava (BTS)",
+      "tag": "cheap backup",
+      "highlight": false,
+      "flyFromUK": "Ryanair / Buzz / Wizz direct from Stansted, ~2h15, most days, £16–37",
+      "thenToBrno": "~9 km to Bratislava centre, then FlixBus/RegioJet ~1.5–2h",
+      "roughTotal": "~4.5–5h",
+      "bestFor": "Cheap backup if Brno/Vienna fares spike",
+      "mapsQuery": "Bratislava+Airport+to+Brno"
+    },
+    {
+      "name": "Prague (PRG)",
+      "tag": "bargain only",
+      "highlight": false,
+      "flyFromUK": "Many UK flights daily",
+      "thenToBrno": "City-centre station, then train ~2.5h",
+      "roughTotal": "~5h+",
+      "bestFor": "Only for a bargain UK→Prague fare",
+      "mapsQuery": "Prague+to+Brno"
+    }
+  ],
+  "mixAndMatch": {
+    "title": "Mixing and matching",
+    "intro": "You don't have to fly in and out the same way.",
+    "points": [
+      "Fly into Brno, fly home from Vienna — cheap direct flight in, then the hourly RegioJet bus to Vienna airport for any day's return.",
+      "Stay till Tuesday — the Brno direct flight runs Tue–Sat, so if you're with us at the reservoir through the weekend, a Tuesday flight home means no transfer at all."
+    ],
+    "rule": "When in doubt: Brno in, Vienna out."
+  },
+  "groundBooking": {
+    "note": "One booking link covers all ground legs — Vienna, Bratislava and the Prague train.",
+    "name": "RegioJet",
+    "url": "https://regiojet.com"
+  }
+}

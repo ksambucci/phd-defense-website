@@ -1,0 +1,10 @@
+{
+  "atAGlance": [
+    { "when": "Thursday", "what": "Guests arrive" },
+    { "when": "Friday 13:30", "what": "PhD Defense" },
+    { "when": "Friday 16:30", "what": "Party Tram" },
+    { "when": "Friday 18:30", "what": "Dinner" },
+    { "when": "Friday night", "what": "Celebration Party" },
+    { "when": "Saturday–Sunday", "what": "Reservoir Weekend" }
+  ]
+}

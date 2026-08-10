@@ -1,0 +1,38 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# environment
+.env
+.env.production
+
+# Full-quality photo originals — kept locally as a backup, NEVER published.
+# The copies under public/images/ are the web versions (EXIF-stripped, downscaled).
+_originals-backup/
+
+# Sensitive location exports — never commit these to a public repo
+*.zip
+takeout*/
+Takeout/
+# Root-anchored (leading slash): these match ONLY the Google export dropped at
+# the project root. Unanchored, "Timeline.json" also matched src/data/timeline.json
+# on case-insensitive filesystems and silently excluded real site content.
+/Timeline.json
+/location-history*.json
+/Records.json
+
+# macOS / editor
+.DS_Store
+Thumbs.db
+
+# RStudio leftovers (this folder started as an R project)
+.Rproj.user/
+.Rhistory

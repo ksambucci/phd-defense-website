@@ -1,0 +1,21 @@
+{
+  "title": "Where the PhD Took Me",
+  "subtitle": "Five years, three continents, a string of conferences, and one memorable batch of gorilla samples delivered by train.",
+  "base": { "name": "Brno", "country": "Czech Republic", "continent": "Europe", "lat": 49.195, "lng": 16.606 },
+  "_comment": "Distances are auto-computed (straight-line, round trips from Brno; moves count one-way) from the coords below. The UK origin pin is set to London — change it if you moved from elsewhere. Set 'realTotalKm' once you export your Google Timeline (see README) for the true grand total incl. every local & conference hop.",
+  "realTotalKm": null,
+  "places": [
+    { "name": "United Kingdom", "country": "United Kingdom", "continent": "Europe", "lat": 51.507, "lng": -0.128, "date": "Sep 2021", "type": "move", "trips": 1, "oneWay": true, "note": "Moved from the UK to Brno to start the PhD" },
+    { "name": "Bwindi, Uganda", "country": "Uganda", "continent": "Africa", "lat": -1.06, "lng": 29.66, "date": "2021–2024", "type": "fieldwork", "trips": 4, "note": "Four field seasons with the gorillas" },
+    { "name": "Atlanta, Georgia, USA", "country": "United States", "continent": "North America", "lat": 33.749, "lng": -84.388, "date": "Jun 2022", "type": "conference", "trips": 1, "note": "EEID — Ecology & Evolution of Infectious Diseases" },
+    { "name": "Cēsis, Latvia", "country": "Latvia", "continent": "Europe", "lat": 57.312, "lng": 25.272, "date": "Aug 2022", "type": "conference", "trips": 1, "note": "Anthropology summer school" },
+    { "name": "Davis, California, USA", "country": "United States", "continent": "North America", "lat": 38.544, "lng": -121.74, "date": "Sep 2022", "type": "internship", "trips": 1, "note": "Research internship" },
+    { "name": "Cairo, Egypt", "country": "Egypt", "continent": "Africa", "lat": 30.044, "lng": 31.235, "date": "Dec 2022", "type": "mishap", "trips": 1, "minor": true, "noDistance": true, "note": "Missed my connecting flight from Uganda to Vienna (via Cairo), so I had a day to explore — and saw the pyramids! My luggage stayed behind in Egypt with priceless gorilla faecal samples. A very stressful week until we were reunited." },
+    { "name": "Aarhus, Denmark", "country": "Denmark", "continent": "Europe", "lat": 56.078, "lng": 10.235, "date": "Apr 2023", "type": "conference", "trips": 1, "note": "Moesgaard Museum — human–animal relations conference" },
+    { "name": "Kigali, Rwanda", "country": "Rwanda", "continent": "Africa", "lat": -1.944, "lng": 30.061, "date": "Jul 2023", "type": "conference", "trips": 1, "note": "International Congress for Conservation Biology" },
+    { "name": "Brussels, Belgium", "country": "Belgium", "continent": "Europe", "lat": 50.847, "lng": 4.357, "date": "Jan 2024", "type": "errand", "trips": 1, "note": "Gorilla samples, delivered by train" },
+    { "name": "Bangor, Wales", "country": "United Kingdom", "continent": "Europe", "lat": 53.228, "lng": -4.129, "date": "Apr 2024", "type": "conference", "trips": 1, "note": "Human–primate interfaces conference" },
+    { "name": "Cluj-Napoca, Romania", "country": "Romania", "continent": "Europe", "lat": 46.77, "lng": 23.591, "date": "Jul 2024", "type": "conference", "trips": 1, "note": "Parasitology summer school" },
+    { "name": "Leiden, Netherlands", "country": "Netherlands", "continent": "Europe", "lat": 52.16, "lng": 4.49, "date": "Jul 2025", "type": "move", "trips": 1, "oneWay": true, "note": "Relocated to Leiden to write up" }
+  ]
+}

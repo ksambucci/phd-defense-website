@@ -1,0 +1,26 @@
+{
+  "lead": "Stay in the centre to be walkable to the defense, the bars and the tram — unless you're with us at the reservoir.",
+  "groups": [
+    {
+      "title": "Comfortable — for parents & older relatives (central)",
+      "hotels": [
+        { "name": "Hotel Grandezza", "blurb": "Palace-style on Zelný trh square, fluent English staff, 5 min from the station.", "url": "https://grandezzahotel.cz" },
+        { "name": "Grand Palace Brno", "blurb": "Elegant, edge of old town, spa + lobby piano bar.", "url": "https://grandpalace.cz" },
+        { "name": "Grandhotel Brno", "blurb": "Classic, directly opposite the train/bus station (handy for the Vienna bus crowd).", "url": "https://grandhotelbrno.cz" }
+      ]
+    },
+    {
+      "title": "Good value — central",
+      "hotels": [
+        { "name": "Hotel Avion", "blurb": "Solid mid-range, dead centre on Česká.", "url": "https://avion-hotel.cz" },
+        { "name": "Internesto Apartments", "blurb": "Apartment-style with kitchens, good for families sharing.", "url": "https://internesto.com" }
+      ]
+    },
+    {
+      "title": "At the reservoir",
+      "hotels": [
+        { "name": "Maximus Resort", "blurb": "On the Brno reservoir; spa, pools, lakeside sauna. The natural overflow for anyone who can't fit in the rented house but wants the lakeside weekend.", "url": "https://maximus-resort.cz" }
+      ]
+    }
+  ]
+}

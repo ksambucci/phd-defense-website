@@ -1,0 +1,33 @@
+{
+  "intro": "Many guests have never seen a PhD defense — here's what to expect. Short version: it's public, you're warmly welcome, and there's absolutely no obligation to come.",
+  "venue": {
+    "name": "Department of Anthropology (Ústav antropologie)",
+    "faculty": "Faculty of Science, Masaryk University — Budova 2",
+    "address": "Kotlářská 2, 602 00 Brno-střed",
+    "note": "Next to the Botanical Garden."
+  },
+  "explainer": {
+    "title": "What happens at a Czech PhD defense?",
+    "_comment": "TBC: Kelly to confirm exact details.",
+    "points": [
+      { "q": "Is it public?", "a": "Yes — it's open to the public and guests are very welcome to watch. [Kelly to confirm.]" },
+      { "q": "How long does it last?", "a": "Roughly a few hours from arrival to decision. [Kelly to confirm.]" },
+      { "q": "What's the dress code?", "a": "Smart casual." },
+      { "q": "When do photos happen?", "a": "After the decision is announced. [Kelly to confirm.]" },
+      { "q": "When do celebrations begin?", "a": "Straight after — drinks, then we board the party tram at 16:30. It drops us off for dinner at 18:30." }
+    ]
+  },
+  "schedule": {
+    "_comment": "CONFIRMED anchors: defense 13:30, tram 16:30, dinner drop-off 18:30. The rows marked 'approx.' are estimates filling the gap between them — Kelly to confirm or adjust.",
+    "tbc": false,
+    "rows": [
+      { "time": "13:15", "what": "Arrive at the department" },
+      { "time": "13:30", "what": "Defense begins" },
+      { "time": "15:00", "what": "Questions & discussion (approx.)" },
+      { "time": "15:45", "what": "Decision announced (approx.)" },
+      { "time": "16:00", "what": "Photos & first drinks (approx.)" },
+      { "time": "16:30", "what": "Board the party tram" },
+      { "time": "18:30", "what": "Tram drops us for dinner" }
+    ]
+  }
+}

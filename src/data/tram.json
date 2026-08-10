@@ -1,0 +1,23 @@
+{
+  "heading": "The Brno Celebration Tram (Šalina)",
+  "intro": "At 16:30, straight after the defense, we board a private historic party tram and celebrate while rolling through Brno — until it drops us off for dinner at 18:30. Yes, really.",
+  "website": { "label": "Party Šalina (DPMB)", "url": "https://party.dpmb.cz/" },
+  "aboutTitle": "About the tram",
+  "about": [
+    { "label": "Capacity", "value": "~50 people — 38 seated plus standing room" },
+    { "label": "Onboard bar", "value": "Three taps, two fridges, coffee machine — drinks flowing the whole way" },
+    { "label": "Sound & screens", "value": "Bluetooth sound system, screens, party lights, WiFi, and yes — a toilet" },
+    { "label": "Operated by", "value": "DPMB, Brno's public transport company" }
+  ],
+  "eventTitle": "Our trip",
+  "tbc": false,
+  "details": [
+    { "label": "Departure time", "value": "16:30, straight after the defense" },
+    { "label": "Meeting point", "value": "[TBC]" },
+    { "label": "Drop-off", "value": "18:30 — the tram drops us off for dinner" },
+    { "label": "Route", "value": "A loop through Brno on a private tram, ending near the dinner venue. [TBC]" },
+    { "label": "Aboard", "value": "Drinks & snacks sorted. [TBC]" }
+  ],
+  "note": "Two hours of Brno rolling past the window with a bar on board. Meeting point still to be confirmed — everything else is locked in.",
+  "photoCredit": "Photos: DPMB / party.dpmb.cz"
+}

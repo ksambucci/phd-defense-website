@@ -1,0 +1,178 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import travels from '../data/travels.json';
+
+// Straight-line (great-circle) distance between two {lat,lng} points, in km.
+function haversine(a: { lat: number; lng: number }, b: { lat: number; lng: number }) {
+  const R = 6371;
+  const toRad = (d: number) => (d * Math.PI) / 180;
+  const dLat = toRad(b.lat - a.lat);
+  const dLng = toRad(b.lng - a.lng);
+  const la1 = toRad(a.lat);
+  const la2 = toRad(b.lat);
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(la1) * Math.cos(la2) * Math.sin(dLng / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(h));
+}
+
+const base = travels.base;
+const places = travels.places;
+
+let computedKm = 0;
+for (const p of places) {
+  if (p.noDistance) continue; // layovers / detours already on another trip's path
+  const legs = p.oneWay ? 1 : 2;
+  computedKm += haversine(base, p) * legs * (p.trips || 1);
+}
+
+const totalKm = travels.realTotalKm ?? computedKm;
+const isReal = travels.realTotalKm != null;
+const totalKmRounded = Math.round(totalKm / 1000) * 1000;
+const aroundEarth = (totalKm / 40075).toFixed(1);
+
+const countries = new Set([base.country, ...places.map((p) => p.country)]);
+const continents = new Set([base.continent, ...places.map((p) => p.continent)]);
+const tripCount = places.reduce((sum, p) => sum + (p.minor ? 0 : p.trips || 1), 0);
+
+const fmt = (n: number) => n.toLocaleString('en-GB');
+---
+
+<Layout title="Travel Map" description="Five years of PhD travel, mapped — with a running total.">
+  <PageHeader eyebrow="Have passport, will travel" title={travels.title} lead={travels.subtitle} />
+
+  <section class="section">
+    <div class="container">
+      <!-- Headline stats -->
+      <ul class="travel-stats">
+        <li>
+          <span class="travel-stats__num">{isReal ? `${fmt(totalKmRounded)}` : `≈${fmt(totalKmRounded)}`}</span>
+          <span class="travel-stats__cap">km travelled</span>
+        </li>
+        <li><span class="travel-stats__num">{aroundEarth}×</span><span class="travel-stats__cap">around the Earth</span></li>
+        <li><span class="travel-stats__num">{countries.size}</span><span class="travel-stats__cap">countries</span></li>
+        <li><span class="travel-stats__num">{continents.size}</span><span class="travel-stats__cap">continents</span></li>
+        <li><span class="travel-stats__num">{tripCount}</span><span class="travel-stats__cap">major trips</span></li>
+      </ul>
+
+      <p class="muted travel-caveat">
+        {isReal
+          ? 'Grand total from Kelly\'s Google Timeline — every hop included.'
+          : 'Straight-line distance for the big trips only (round trips from Brno). The real number — including every conference, train and local hop — is higher; export the Google Timeline and we\'ll drop the true grand total in here.'}
+      </p>
+
+      <!-- Map -->
+      <div id="travel-map" class="travel-map" role="img" aria-label="Map of Kelly's PhD travels"></div>
+
+      <!-- Legend / list -->
+      <div class="grid grid--3 travel-list">
+        {places.map((p) => (
+          <div class="card travel-place" data-type={p.type}>
+            <span class={`travel-dot travel-dot--${p.type}`} aria-hidden="true"></span>
+            <div>
+              <h3>{p.name}{p.trips > 1 && <span class="travel-x"> ×{p.trips}</span>}</h3>
+              <p class="travel-place__date">{p.date}</p>
+              <p class="muted">{p.note}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script is:inline define:vars={{ base, places }}>
+  const colors = {
+    fieldwork: '#c79a3c',
+    conference: '#d9785b',
+    internship: '#4d8a64',
+    errand: '#7baf90',
+    move: '#356b4b',
+    mishap: '#8a6fb0',
+    home: '#11241a',
+  };
+
+  const map = L.map('travel-map', { scrollWheelZoom: false, worldCopyJump: true }).setView([25, 12], 2);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors',
+    maxZoom: 12,
+  }).addTo(map);
+
+  const baseLL = [base.lat, base.lng];
+  const bounds = [baseLL];
+
+  places.forEach((p) => {
+    const ll = [p.lat, p.lng];
+    bounds.push(ll);
+    // No line for detours/layovers — they weren't a trip from Brno.
+    if (!p.noDistance) {
+      L.polyline([baseLL, ll], {
+        color: colors[p.type] || '#356b4b',
+        weight: 2,
+        opacity: 0.55,
+        dashArray: p.oneWay ? null : '4 7',
+      }).addTo(map);
+    }
+    L.circleMarker(ll, {
+      radius: 7,
+      color: '#ffffff',
+      weight: 2,
+      fillColor: colors[p.type] || '#356b4b',
+      fillOpacity: 1,
+    })
+      .addTo(map)
+      .bindPopup(`<b>${p.name}</b><br>${p.date}${p.trips > 1 ? ` &middot; ${p.trips} trips` : ''}<br>${p.note || ''}`);
+  });
+
+  L.circleMarker(baseLL, {
+    radius: 9,
+    color: '#ffffff',
+    weight: 3,
+    fillColor: colors.home,
+    fillOpacity: 1,
+  })
+    .addTo(map)
+    .bindPopup(`<b>${base.name}</b><br>Home base`);
+
+  map.fitBounds(bounds, { padding: [40, 40] });
+</script>
+
+<style>
+  .travel-stats {
+    list-style: none;
+    margin: 0 0 1rem;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem 1rem;
+    text-align: center;
+  }
+  @media (min-width: 720px) { .travel-stats { grid-template-columns: repeat(5, 1fr); } }
+  .travel-stats__num { display: block; font-family: var(--font-display); font-size: clamp(1.7rem, 6vw, 2.8rem); color: var(--forest-600); line-height: 1; }
+  .travel-stats__cap { display: block; margin-top: 0.35rem; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); }
+  .travel-caveat { max-width: 70ch; margin-bottom: 1.5rem; }
+
+  .travel-map {
+    height: clamp(360px, 60vh, 560px);
+    width: 100%;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-soft);
+    z-index: 0;
+  }
+
+  .travel-list { margin-top: 2rem; }
+  .travel-place { display: flex; gap: 0.8rem; align-items: flex-start; }
+  .travel-place h3 { margin: 0 0 0.15rem; font-size: 1.15rem; }
+  .travel-place__date { margin: 0 0 0.3rem; font-weight: 800; font-size: 0.8rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--forest-500); }
+  .travel-place p:last-child { margin: 0; }
+  .travel-x { color: var(--gold); }
+  .travel-dot { flex: 0 0 auto; width: 16px; height: 16px; border-radius: 50%; margin-top: 4px; border: 2px solid #fff; box-shadow: 0 0 0 1px var(--line); }
+  .travel-dot--fieldwork { background: #c79a3c; }
+  .travel-dot--conference { background: #d9785b; }
+  .travel-dot--internship { background: #4d8a64; }
+  .travel-dot--errand { background: #7baf90; }
+  .travel-dot--move { background: #356b4b; }
+  .travel-dot--mishap { background: #8a6fb0; }
+</style>

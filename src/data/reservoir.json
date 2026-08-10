@@ -1,0 +1,29 @@
+{
+  "heading": "The Reservoir Weekend",
+  "intro": "For anyone staying on, the celebration spills out to a rented house by the Brno reservoir for the weekend.",
+  "house": {
+    "name": "Chata Prýgl",
+    "url": "https://chataprygl.cz",
+    "blurb": "By the reservoir, with pool, sauna, terraces, outdoor kitchen, grills and sports facilities; sleeps ~8–9 plus extra beds."
+  },
+  "logistics": {
+    "_comment": "TBC: Kelly to assign who's staying.",
+    "arrival": "Arrive Saturday",
+    "departure": "Depart Sunday",
+    "who": "[Kelly to assign who's staying at the house.]"
+  },
+  "activities": [
+    "Boat trips on the reservoir",
+    "Swimming",
+    "Paddleboarding",
+    "Lakeside walks",
+    "Cycling routes",
+    "Veveří Castle",
+    "Easy hops back into central Brno"
+  ],
+  "overflow": {
+    "name": "Maximus Resort",
+    "url": "https://maximus-resort.cz",
+    "note": "Nearby overflow accommodation on the reservoir for anyone who can't fit in the house."
+  }
+}

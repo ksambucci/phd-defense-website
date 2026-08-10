@@ -1,0 +1,68 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import MapEmbed from '../components/MapEmbed.astro';
+import defense from '../data/defense.json';
+import siteConfig from '../../site.config.json';
+
+const venue = siteConfig.maps.defenseVenue;
+---
+
+<Layout title="The Defense" description="What happens at a Czech PhD defense — and you're welcome to watch.">
+  <PageHeader eyebrow="The reason we're all here" title="The Defense" lead={defense.intro} />
+
+  <section class="section">
+    <div class="container defense-grid">
+      <div>
+        <h2>Venue</h2>
+        <div class="card venue-card">
+          <p><strong>{defense.venue.name}</strong></p>
+          <p class="muted">{defense.venue.faculty}</p>
+          <p>{defense.venue.address}</p>
+          <p class="muted">{defense.venue.note}</p>
+          <a class="btn btn--ghost" href={venue.mapsLink} target="_blank" rel="noopener">Open in Google Maps ↗</a>
+        </div>
+      </div>
+      <div>
+        <MapEmbed query={venue.embedQuery} title="Map of the defense venue" />
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Explainer -->
+      <h2 style="margin-top:2.5rem">{defense.explainer.title}</h2>
+      <div class="grid grid--2">
+        {defense.explainer.points.map((p) => (
+          <div class="card">
+            <h3>{p.q}</h3>
+            <p class="muted">{p.a}</p>
+          </div>
+        ))}
+      </div>
+
+      <!-- Schedule -->
+      <h2 style="margin-top:2.5rem">
+        Defense-day schedule
+        {defense.schedule.tbc && <span class="tbc">times TBC</span>}
+      </h2>
+      <div class="table-wrap" style="max-width:480px">
+        <table>
+          <thead><tr><th>Time</th><th>&nbsp;</th></tr></thead>
+          <tbody>
+            {defense.schedule.rows.map((r) => (
+              <tr><td><strong>{r.time}</strong></td><td>{r.what}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .defense-grid { display: grid; gap: 1.5rem; }
+  @media (min-width: 820px) { .defense-grid { grid-template-columns: 1fr 1fr; align-items: start; } }
+  .venue-card { display: flex; flex-direction: column; gap: 0.4rem; align-items: flex-start; }
+  .venue-card .btn { margin-top: 0.6rem; }
+  h2 .tbc { margin-left: 0.6rem; vertical-align: middle; }
+</style>

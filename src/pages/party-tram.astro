@@ -1,0 +1,67 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Figure from '../components/Figure.astro';
+import tram from '../data/tram.json';
+
+// Gallery photos downloaded from the operator into public/images/tram/ (foto0–foto13).
+const photos = Array.from({ length: 14 }, (_, i) => `/images/tram/foto${i}.jpg`);
+---
+
+<Layout title="Party Tram" description="A private historic party tram through Brno after the defense.">
+  <PageHeader eyebrow="All aboard" title={tram.heading} lead={tram.intro} />
+
+  <section class="section">
+    <div class="container">
+      <!-- Gallery -->
+      <div class="tram-gallery">
+        {photos.map((src, i) => (
+          <Figure src={src} alt={`Party tram photo ${i + 1}`} label="public/images/tram/" ratio="4 / 3" />
+        ))}
+      </div>
+      <p class="muted tram-credit">
+        {tram.photoCredit} · <a href={tram.website.url} target="_blank" rel="noopener">{tram.website.label} ↗</a>
+      </p>
+
+      <!-- About the tram -->
+      <h2 style="margin-top:2.5rem">{tram.aboutTitle}</h2>
+      <div class="grid grid--2">
+        {tram.about.map((d) => (
+          <div class="card detail">
+            <span class="detail__label">{d.label}</span>
+            <span class="detail__value">{d.value}</span>
+          </div>
+        ))}
+      </div>
+
+      <!-- Our trip (event-specific) -->
+      <h2 style="margin-top:2.5rem">{tram.eventTitle} {tram.tbc && <span class="tbc">TBC</span>}</h2>
+      <div class="grid grid--2">
+        {tram.details.map((d) => (
+          <div class="card detail">
+            <span class="detail__label">{d.label}</span>
+            <span class="detail__value">{d.value}</span>
+          </div>
+        ))}
+      </div>
+
+      <p class="lead" style="margin-top:2rem">{tram.note}</p>
+
+      <p style="margin-top:1.5rem">
+        <a class="btn btn--ghost" href={tram.website.url} target="_blank" rel="noopener">
+          See the tram on the operator's site ↗
+        </a>
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  h2 .tbc { margin-left: 0.5rem; vertical-align: middle; }
+  .tram-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+  @media (min-width: 720px) { .tram-gallery { grid-template-columns: repeat(3, 1fr); } }
+  .tram-credit { margin-top: 0.8rem; font-size: 0.85rem; }
+  .detail { display: flex; flex-direction: column; gap: 0.3rem; }
+  .detail__label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 800; color: var(--gold); }
+  .detail__value { font-size: 1.1rem; }
+</style>

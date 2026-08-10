@@ -1,0 +1,18 @@
+---
+// Keyless Google Maps embed. Uses the public ?q= embed endpoint — no API key,
+// safe to commit to a public repo. Pass a query string or "lat,lng".
+interface Props {
+  query: string;
+  title?: string;
+}
+const { query, title = 'Map' } = Astro.props;
+const src = `https://maps.google.com/maps?q=${encodeURIComponent(query)}&z=15&output=embed`;
+---
+<iframe
+  class="map-embed"
+  src={src}
+  title={title}
+  loading="lazy"
+  referrerpolicy="no-referrer-when-downgrade"
+  allowfullscreen
+></iframe>

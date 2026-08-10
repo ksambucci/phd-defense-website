@@ -1,0 +1,138 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Countdown from '../components/Countdown.astro';
+import Figure from '../components/Figure.astro';
+import { url } from '../lib/url';
+import siteConfig from '../../site.config.json';
+import schedule from '../data/schedule.json';
+import { extrasNav } from '../lib/nav';
+
+const { title, subtitle, tagline } = siteConfig.branding;
+const stats = siteConfig.stats;
+---
+
+<Layout>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__media">
+      <Figure src="/images/hero/brno.jpg" alt="Brno skyline" label="Add a hero photo: public/images/hero/brno.jpg" ratio="auto" rounded={false} />
+    </div>
+    <div class="hero__overlay"></div>
+    <div class="container hero__content">
+      <p class="eyebrow hero__eyebrow">Kelly's PhD Celebration</p>
+      <h1 class="hero__title">{title}</h1>
+      <p class="hero__subtitle">{subtitle}</p>
+      <p class="hero__tagline">{tagline}</p>
+      <div class="hero__actions">
+        <a class="btn btn--gold btn--lg" href={url('/rsvp')}>RSVP</a>
+        <a class="btn btn--ghost btn--lg hero__ghost" href={url('/travel')}>Plan your trip</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- COUNTDOWN -->
+  <section class="countdown-band">
+    <div class="container">
+      <Countdown />
+    </div>
+  </section>
+
+  <!-- AT-A-GLANCE -->
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">The weekend at a glance</p>
+      <h2>Here's roughly how it goes</h2>
+      <div class="card schedule-card">
+        <table>
+          <thead>
+            <tr><th>When</th><th>What</th></tr>
+          </thead>
+          <tbody>
+            {schedule.atAGlance.map((row) => (
+              <tr><td><strong>{row.when}</strong></td><td>{row.what}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="muted schedule-note">Sell the weekend, not the viva — but yes, there is a defense, and you're welcome to watch.</p>
+    </div>
+  </section>
+
+  <!-- SILLY STATS -->
+  <section class="stats-band">
+    <div class="container">
+      <ul class="stats">
+        <li><span class="stats__num">{stats.yearsSpent}</span><span class="stats__cap">Years spent</span></li>
+        <li><span class="stats__num">{stats.fieldSeasons}</span><span class="stats__cap">Field seasons</span></li>
+        <li><span class="stats__num">{stats.papersPublished}</span><span class="stats__cap">Papers published</span></li>
+        <li><span class="stats__num">{stats.cupsOfCoffee}</span><span class="stats__cap">Cups of coffee</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- QUICK LINKS -->
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Everything you'll ask</p>
+      <h2>Start here</h2>
+      <div class="grid grid--3">
+        <a class="card link-card" href={url('/travel')}><h3>✈️ Travel</h3><p class="muted">Brno in, Vienna out — every route in and home.</p></a>
+        <a class="card link-card" href={url('/accommodation')}><h3>🛏️ Accommodation</h3><p class="muted">Where to stay, central vs. the reservoir.</p></a>
+        <a class="card link-card" href={url('/defense')}><h3>🎓 The Defense</h3><p class="muted">What a Czech PhD defense actually is.</p></a>
+        <a class="card link-card" href={url('/party-tram')}><h3>🚋 Party Tram</h3><p class="muted">A private historic tram through Brno.</p></a>
+        <a class="card link-card" href={url('/friday-party')}><h3>🎉 Friday Party</h3><p class="muted">The main event. One golden rule.</p></a>
+        <a class="card link-card" href={url('/reservoir')}><h3>🏞️ Reservoir Weekend</h3><p class="muted">Lakeside house, sauna, boats, the lot.</p></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXTRAS -->
+  <section class="section section--tight">
+    <div class="container">
+      <div class="extras">
+        {extrasNav.map((item) => (
+          <a class="extras__link" href={url(item.href)}>{item.label} →</a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero { position: relative; color: var(--cream-50); isolation: isolate; }
+  .hero__media { position: absolute; inset: 0; z-index: -2; }
+  .hero__media :global(.figure) { height: 100%; width: 100%; aspect-ratio: auto; border-radius: 0; }
+  .hero__overlay {
+    position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(180deg, rgba(17,36,26,0.55) 0%, rgba(17,36,26,0.78) 100%);
+  }
+  .hero__content { padding-block: clamp(3.5rem, 12vw, 7rem); max-width: 760px; }
+  .hero__eyebrow { color: var(--gold-soft); }
+  .hero__title { color: var(--cream-50); font-size: clamp(2.6rem, 11vw, 5.5rem); margin-bottom: 0.2em; }
+  .hero__subtitle { font-size: clamp(1.1rem, 3vw, 1.5rem); font-weight: 800; color: var(--gold-soft); margin-bottom: 1rem; }
+  .hero__tagline { font-size: clamp(1.05rem, 2.5vw, 1.3rem); color: var(--cream-100); max-width: 58ch; }
+  .hero__actions { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.8rem; }
+  .hero__ghost { color: var(--cream-50); border-color: rgba(255,255,255,0.5); }
+  .hero__ghost:hover { background: rgba(255,255,255,0.12); }
+
+  .countdown-band { background: var(--forest-700); padding-block: clamp(2rem, 5vw, 3rem); }
+
+  .schedule-card { padding: 0; overflow: hidden; }
+  .schedule-card table { min-width: 0; }
+  .schedule-note { margin-top: 1rem; }
+
+  .stats-band { background: var(--forest-800); color: var(--cream-50); padding-block: clamp(2rem, 5vw, 3rem); }
+  .stats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem 1rem; text-align: center; }
+  @media (min-width: 720px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+  .stats__num { display: block; font-family: var(--font-display); font-size: clamp(2rem, 7vw, 3.2rem); color: var(--gold-soft); line-height: 1; }
+  .stats__cap { display: block; margin-top: 0.4rem; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cream-200); }
+
+  .link-card { text-decoration: none; color: inherit; transition: transform 0.12s ease, box-shadow 0.2s ease; display: block; }
+  .link-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+  .link-card h3 { margin-bottom: 0.3rem; }
+  .link-card p { margin: 0; }
+
+  .extras { display: flex; flex-wrap: wrap; gap: 0.8rem 1.5rem; justify-content: center; }
+  .extras__link { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; text-decoration: none; color: var(--forest-600); }
+  .extras__link:hover { color: var(--gold); }
+</style>

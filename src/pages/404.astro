@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { url } from '../lib/url';
+---
+<Layout title="Lost in the forest">
+  <section class="section center">
+    <div class="container">
+      <p style="font-size:4rem;margin:0">🦍</p>
+      <h1>Lost in the forest</h1>
+      <p class="lead" style="margin-inline:auto">That page wandered off. Let's get you back.</p>
+      <p><a class="btn btn--primary btn--lg" href={url('/')}>Back to home</a></p>
+    </div>
+  </section>
+</Layout>

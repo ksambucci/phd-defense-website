@@ -1,0 +1,63 @@
+---
+import siteConfig from '../../site.config.json';
+const target = siteConfig.event.countdownTarget;
+const tbc = siteConfig.event.defenseDateTBC;
+const label = siteConfig.event.defenseDateLabel;
+---
+<div class="countdown" data-target={target}>
+  <p class="countdown__label">
+    Counting down to the defense{tbc && <span class="tbc">date TBC</span>}
+  </p>
+  <div class="countdown__grid" aria-live="polite">
+    <div class="countdown__unit"><span class="countdown__num" data-unit="days">—</span><span class="countdown__cap">days</span></div>
+    <div class="countdown__unit"><span class="countdown__num" data-unit="hours">—</span><span class="countdown__cap">hrs</span></div>
+    <div class="countdown__unit"><span class="countdown__num" data-unit="minutes">—</span><span class="countdown__cap">min</span></div>
+    <div class="countdown__unit"><span class="countdown__num" data-unit="seconds">—</span><span class="countdown__cap">sec</span></div>
+  </div>
+  <p class="countdown__date">{label}</p>
+</div>
+
+<style>
+  .countdown { text-align: center; }
+  .countdown__label { font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.8rem; color: var(--gold-soft); margin-bottom: 0.75rem; }
+  .countdown__label .tbc { margin-left: 0.5rem; }
+  .countdown__grid { display: flex; justify-content: center; gap: 0.6rem; flex-wrap: wrap; }
+  .countdown__unit {
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 14px;
+    padding: 0.8rem 0.6rem;
+    min-width: 74px;
+  }
+  .countdown__num { display: block; font-family: var(--font-display); font-size: clamp(1.8rem, 6vw, 2.8rem); line-height: 1; color: var(--cream-50); font-variant-numeric: tabular-nums; }
+  .countdown__cap { display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--cream-200); margin-top: 0.3rem; }
+  .countdown__date { margin: 1rem 0 0; color: var(--cream-200); font-size: 0.95rem; }
+</style>
+
+<script>
+  function pad(n: number) { return String(n).padStart(2, '0'); }
+  document.querySelectorAll<HTMLElement>('.countdown').forEach((el) => {
+    const target = new Date(el.dataset.target || '').getTime();
+    const fields = {
+      days: el.querySelector('[data-unit="days"]'),
+      hours: el.querySelector('[data-unit="hours"]'),
+      minutes: el.querySelector('[data-unit="minutes"]'),
+      seconds: el.querySelector('[data-unit="seconds"]'),
+    };
+    function tick() {
+      const diff = target - Date.now();
+      if (isNaN(target)) return;
+      const clamped = Math.max(0, diff);
+      const d = Math.floor(clamped / 86400000);
+      const h = Math.floor((clamped % 86400000) / 3600000);
+      const m = Math.floor((clamped % 3600000) / 60000);
+      const s = Math.floor((clamped % 60000) / 1000);
+      if (fields.days) fields.days.textContent = String(d);
+      if (fields.hours) fields.hours.textContent = pad(h);
+      if (fields.minutes) fields.minutes.textContent = pad(m);
+      if (fields.seconds) fields.seconds.textContent = pad(s);
+    }
+    tick();
+    setInterval(tick, 1000);
+  });
+</script>

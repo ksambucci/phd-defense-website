@@ -1,0 +1,45 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import timeline from '../data/timeline.json';
+---
+
+<Layout title="PhD Timeline" description="Kelly's PhD journey, September 2021 to September 2026.">
+  <PageHeader eyebrow="Five years in the making" title={timeline.title} lead={timeline.subtitle} />
+
+  <section class="section">
+    <div class="container">
+      <ol class="timeline">
+        {timeline.milestones.map((m, i) => (
+          <li class={`timeline__item ${i === timeline.milestones.length - 1 ? 'timeline__item--final' : ''}`}>
+            <div class="timeline__dot" aria-hidden="true"></div>
+            <div class="timeline__card card">
+              <p class="timeline__date">{m.date}</p>
+              <h3>{m.title}</h3>
+              <p class="muted">{m.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .timeline { list-style: none; margin: 0; padding: 0; position: relative; }
+  .timeline::before {
+    content: ''; position: absolute; left: 11px; top: 6px; bottom: 6px;
+    width: 2px; background: var(--forest-300);
+  }
+  .timeline__item { position: relative; padding-left: 2.5rem; margin-bottom: 1.5rem; }
+  .timeline__dot {
+    position: absolute; left: 4px; top: 6px; width: 16px; height: 16px;
+    border-radius: 50%; background: var(--gold); border: 3px solid var(--cream-50);
+    box-shadow: 0 0 0 2px var(--forest-300);
+  }
+  .timeline__item--final .timeline__dot { background: var(--coral); }
+  .timeline__date { font-weight: 800; color: var(--forest-600); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.8rem; margin: 0 0 0.3rem; }
+  .timeline__card h3 { margin-bottom: 0.3rem; }
+  .timeline__card p:last-child { margin: 0; }
+  @media (min-width: 720px) { .timeline__item { padding-left: 3rem; } }
+</style>

@@ -7,8 +7,14 @@
  *   - re-encodes at web quality
  *
  * Full-quality originals live in _originals-backup/ (git-ignored). This script
- * never touches them, so it is safe to re-run: drop new photos into
- * public/images/, back them up, then run `npm run harden-images`.
+ * never touches them.
+ *
+ * IMPORTANT: re-encoding an already-hardened JPEG loses a little quality every
+ * time, so process only what is new. Pass one or more subfolders to scope it:
+ *
+ *   npm run harden-images -- gorillas      # just public/images/gorillas/
+ *   npm run harden-images -- people tram   # two folders
+ *   npm run harden-images                  # everything (first run only)
  *
  * Note on what this does and does not do: stripping GPS and downscaling means
  * no location data and no print-resolution file ever reaches the public repo.
@@ -20,7 +26,11 @@ import { join, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 
-const ROOT = fileURLToPath(new URL('../public/images', import.meta.url));
+const IMAGES = fileURLToPath(new URL('../public/images', import.meta.url));
+
+// Optional subfolder args scope the run; no args means the whole images tree.
+const targets = process.argv.slice(2);
+const ROOTS = targets.length ? targets.map((t) => join(IMAGES, t)) : [IMAGES];
 const MAX_EDGE = 1800;
 const JPEG_QUALITY = 82;
 const EXTS = new Set(['.jpg', '.jpeg', '.png']);
@@ -37,6 +47,7 @@ let count = 0;
 let before = 0;
 let after = 0;
 
+for (const ROOT of ROOTS) {
 for await (const file of walk(ROOT)) {
   const originalSize = (await stat(file)).size;
 
@@ -68,11 +79,12 @@ for await (const file of walk(ROOT)) {
   before += originalSize;
   after += output.length;
 
-  const rel = file.slice(ROOT.length + 1);
+  const rel = file.slice(IMAGES.length + 1);
   const saved = ((1 - output.length / originalSize) * 100).toFixed(0);
   console.log(
     `  ${rel.padEnd(48)} ${longest}px -> ${Math.min(longest, MAX_EDGE)}px  ${saved}% smaller`
   );
+}
 }
 
 const mb = (n) => (n / 1024 / 1024).toFixed(2);

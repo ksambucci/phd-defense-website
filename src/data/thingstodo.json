@@ -4,14 +4,14 @@
     "title": "⭐ Kelly's Picks",
     "blurb": "Lead with these — they're the personal heart of the page.",
     "places": [
-      { "name": "Bistro Bastardo", "blurb": "Matthijs' favourite Mexican. On nám. Svobody.", "url": "https://bistrobastardo.com" },
-      { "name": "Klárabára Winecafé", "blurb": "Kelly's favourite wine bar; lovely Moravian wines, owners pick for you. (Closed Sun.)", "url": "https://kbwinecafe.cz" },
+      { "name": "Bistro Bastardo", "blurb": "Matthijs' favourite Mexican. On nám. Svobody.", "url": "https://bistrobastardo.com", "image": "/images/brno/bistro-bastardo.jpg" },
+      { "name": "Klárabára Winecafé", "blurb": "Kelly's favourite wine bar; lovely Moravian wines, owners pick for you. (Closed Sun.)", "url": "https://kbwinecafe.cz", "image": "/images/brno/klarabara.jpg" },
       { "name": "La Famiglia", "blurb": "Mum & Dad's favourite Italian.", "url": "https://lafamigliabrno.cz" },
       { "name": "William Thomas Artisan Bakery", "blurb": "Best croissant in Brno (go in the morning before they sell out).", "url": "https://wtbakery.cz" },
       { "name": "Ještě jednu", "blurb": "Best ice cream. Yes, Niall, this one's for you. Artisan gelato, seasonal flavours, gloriously erratic opening hours.", "url": "https://jestejednu.cz" },
       { "name": "The Bar That Doesn't Exist", "blurb": "Best cocktails.", "url": "https://barkteryneexistuje.cz" },
       { "name": "Queen's Pub", "blurb": "For a spot of darts (and bait to lure Brit & Phil out). Live music, Guinness.", "url": "https://queenspubbrno.cz" },
-      { "name": "Pivovarský dům Poupě", "blurb": "Your brother's favourite, for the tabletop curling. Central brewpub on Dominikánská with its own beers. (Closed Sun.)", "url": "" }
+      { "name": "Pivovarský dům Poupě", "blurb": "Your brother's favourite, for the tabletop curling. Central brewpub on Dominikánská with its own beers. (Closed Sun.)", "url": "", "image": "/images/brno/poupe.jpg" }
     ]
   },
   "mustSee": {

@@ -20,7 +20,7 @@ import reservoir from '../data/reservoir.json';
           <ul class="logistics">
             <li><span>Arrival</span> {reservoir.logistics.arrival}</li>
             <li><span>Departure</span> {reservoir.logistics.departure}</li>
-            <li><span>Who</span> {reservoir.logistics.who}</li>
+            {reservoir.logistics.who && <li><span>Who</span> {reservoir.logistics.who}</li>}
           </ul>
         </div>
         <Figure src={reservoir.photos[0].src} alt={reservoir.photos[0].alt} label="The reservoir house" ratio="4 / 3" />

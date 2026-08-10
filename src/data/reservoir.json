@@ -7,10 +7,10 @@
     "blurb": "By the reservoir, with pool, sauna, terraces, outdoor kitchen, grills and sports facilities; sleeps ~8–9 plus extra beds."
   },
   "logistics": {
-    "_comment": "TBC: Kelly to assign who's staying.",
+    "_comment": "TBC: Kelly still needs to assign who's staying. The 'who' row is hidden on the page while this is empty — fill it in and it reappears.",
     "arrival": "Arrive Saturday",
     "departure": "Depart Sunday",
-    "who": "[Kelly to assign who's staying at the house.]"
+    "who": ""
   },
   "photos": [
     { "src": "/images/reservoir/terrace.jpg", "alt": "Covered terrace and decking at Chata Prýgl" },

@@ -8,8 +8,8 @@ import siteConfig from '../../site.config.json';
 const venue = siteConfig.maps.defenseVenue;
 ---
 
-<Layout title="The Defense" description="What happens at a Czech PhD defense — and you're welcome to watch.">
-  <PageHeader eyebrow="The reason we're all here" title="The Defense" lead={defense.intro} />
+<Layout title="The Defence" description="What happens at a Czech PhD defence — and you're welcome to watch.">
+  <PageHeader eyebrow="The reason we're all here" title="The Defence" lead={defense.intro} />
 
   <section class="section">
     <div class="container defense-grid">
@@ -24,7 +24,7 @@ const venue = siteConfig.maps.defenseVenue;
         </div>
       </div>
       <div>
-        <MapEmbed query={venue.embedQuery} title="Map of the defense venue" />
+        <MapEmbed query={venue.embedQuery} title="Map of the defence venue" />
       </div>
     </div>
 
@@ -42,7 +42,7 @@ const venue = siteConfig.maps.defenseVenue;
 
       <!-- Schedule -->
       <h2 style="margin-top:2.5rem">
-        Defense-day schedule
+        Defence-day schedule
         {defense.schedule.tbc && <span class="tbc">times TBC</span>}
       </h2>
       <div class="table-wrap" style="max-width:480px">

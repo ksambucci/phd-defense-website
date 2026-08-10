@@ -1,5 +1,5 @@
 {
-  "intro": "Many guests have never seen a PhD defense — here's what to expect. Short version: it's public, you're warmly welcome, and there's absolutely no obligation to come.",
+  "intro": "Many guests have never seen a PhD defence — here's what to expect. Short version: it's public, you're warmly welcome, and there's absolutely no obligation to come.",
   "venue": {
     "name": "Department of Anthropology (Ústav antropologie)",
     "faculty": "Faculty of Science, Masaryk University — Budova 2",
@@ -7,7 +7,7 @@
     "note": "Next to the Botanical Garden."
   },
   "explainer": {
-    "title": "What happens at a Czech PhD defense?",
+    "title": "What happens at a Czech PhD defence?",
     "_comment": "Durations below are derived from the confirmed 13:30 start and 16:30 tram departure.",
     "points": [
       { "q": "Is it public?", "a": "Yes — it's open to the public and guests are very welcome to watch." },
@@ -22,7 +22,7 @@
     "tbc": false,
     "rows": [
       { "time": "13:15", "what": "Arrive at the department" },
-      { "time": "13:30", "what": "Defense begins" },
+      { "time": "13:30", "what": "Defence begins" },
       { "time": "15:00", "what": "Questions & discussion (approx.)" },
       { "time": "15:45", "what": "Decision announced (approx.)" },
       { "time": "16:00", "what": "Photos & first drinks (approx.)" },

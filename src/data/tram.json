@@ -1,6 +1,6 @@
 {
   "heading": "The Brno Celebration Tram (Šalina)",
-  "intro": "At 16:30, straight after the defense, we board a private historic party tram and celebrate while rolling through Brno — until it drops us at Železná Růže for dinner at 18:30. Yes, really.",
+  "intro": "At 16:30, straight after the defence, we board a private historic party tram and celebrate while rolling through Brno — until it drops us at Železná Růže for dinner at 18:30. Yes, really.",
   "website": { "label": "Party Šalina (DPMB)", "url": "https://party.dpmb.cz/" },
   "aboutTitle": "About the tram",
   "about": [
@@ -12,7 +12,7 @@
   "eventTitle": "Our trip",
   "tbc": false,
   "details": [
-    { "label": "Departure time", "value": "16:30, straight after the defense" },
+    { "label": "Departure time", "value": "16:30, straight after the defence" },
     { "label": "Pickup point", "value": "Being confirmed — we'll let everyone know before the day." },
     { "label": "Drop-off", "value": "18:30 at Železná Růže, Hlinky 48 — dinner" },
     { "label": "Route", "value": "A loop through Brno on a private tram, ending at the dinner venue in Staré Brno." },

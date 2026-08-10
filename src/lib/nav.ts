@@ -3,7 +3,8 @@ export const mainNav = [
   { label: 'Home', href: '/' },
   { label: 'Travel', href: '/travel' },
   { label: 'Accommodation', href: '/accommodation' },
-  { label: 'Defense', href: '/defense' },
+  // Label is British spelling; the URL stays /defense because it has been shared already.
+  { label: 'Defence', href: '/defense' },
   { label: 'Party Tram', href: '/party-tram' },
   { label: 'Friday Party', href: '/friday-party' },
   { label: 'Reservoir', href: '/reservoir' },

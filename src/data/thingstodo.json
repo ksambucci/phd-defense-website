@@ -2,7 +2,7 @@
   "intro": "The classic sights and Kelly's personal picks. Almost everything is a ~10-min walk from the main square.",
   "kellysPicks": {
     "title": "⭐ Kelly's Picks",
-    "blurb": "Lead with these — they're the personal heart of the page.",
+    "blurb": "The places I actually go. If you only have a day or two, start here.",
     "places": [
       { "name": "Bistro Bastardo", "blurb": "Matthijs' favourite Mexican. On nám. Svobody.", "url": "https://bistrobastardo.com", "image": "/images/brno/bistro-bastardo.jpg" },
       { "name": "Klárabára Winecafé", "blurb": "Kelly's favourite wine bar; lovely Moravian wines, owners pick for you. (Closed Sun.)", "url": "https://kbwinecafe.cz", "image": "/images/brno/klarabara.jpg" },
@@ -24,7 +24,7 @@
   },
   "moreSpots": {
     "title": "More good spots",
-    "blurb": "Secondary to Kelly's Picks — for guests who want extra options.",
+    "blurb": "Plenty more worth your time, if you've got longer or fancy exploring.",
     "categories": [
       {
         "title": "☕ Coffee",
